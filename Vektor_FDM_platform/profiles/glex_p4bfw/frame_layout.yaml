@@ -1,0 +1,88 @@
+# ---------------------------------------------------------------------------
+# Bombardier Global Express P4-BFW · MQAR (Part Number 804-0105) · ficheiro .tsc
+# MAPEAMENTO PROVISÓRIO OBTIDO POR ENGENHARIA INVERSA, NÃO VALIDADO CONTRA O LFL.
+# Cada parâmetro foi identificado por coerência física com a trajetória do voo
+# (posição Luanda -> Paris Le Bourget -> Montreal, altitudes de cruzeiro FL410/FL430).
+# Substituir pelo Data Frame Layout oficial antes de qualquer uso operacional.
+# ---------------------------------------------------------------------------
+aircraft_type: "Bombardier Global Express (BD-700)"
+words_per_second: 256
+storage: packed12_lsb
+byte_order: little
+validated: false
+notes: >-
+  Mapeamento provisório por engenharia inversa (Vektor, 2026-11-19). Sincronismo ARINC 717 a 256 wps,
+  fluxo de bits LSB primeiro. Falta o LFL oficial para velocidade indicada (CAS), N1, flaps, trem,
+  piloto automático, avisos GPWS/TCAS/windshear e desvios ILS.
+
+parameters:
+  Pressure Altitude:
+    description: Altitude-pressão (1013 hPa). Evidência - 256 ft no solo em FNLU (elev. 243 ft), cruzeiros FL410/FL430
+    units: ft
+    encoding: bnr
+    scale: 32
+    locations: [{subframe: all, word: 209}]
+  Radio Height:
+    description: Altitude-rádio. Evidência - correlação 0,996 com altura sobre o aeródromo; 2600 ft = fora de alcance
+    units: ft
+    encoding: bnr
+    scale: 4
+    invalid_above: 2590
+    locations: [{subframe: all, word: [19, 147]}]
+  Groundspeed:
+    description: Velocidade no solo. Evidência - correlação 0,997 com a velocidade calculada pela posição
+    units: kt
+    encoding: unsigned
+    scale: 0.5
+    locations: [{subframe: all, word: 62}]
+  Vertical Speed:
+    description: Razão vertical. Evidência - correlação 0,98 com a derivada da altitude-pressão
+    units: ft/min
+    encoding: bnr
+    scale: 12.5
+    locations: [{subframe: all, word: 199}]
+  Heading:
+    description: Proa. Evidência - concordância circular 0,997 com a rota calculada pela posição (desvio médio -1,4°)
+    units: deg
+    encoding: bnr
+    scale: 0.087890625
+    locations: [{subframe: all, word: 212}]
+  Pitch Angle:
+    description: Atitude de picada. Evidência - correlação 0,92 com o ângulo de trajetória e declive 0,040°/contagem; cerca de 1,5° em cruzeiro
+    units: deg
+    encoding: bnr
+    scale: 0.0439453125
+    locations: [{subframe: all, word: [37, 101, 165, 229]}]
+  Roll Angle:
+    description: Pranchamento. Evidência - correlação 0,75 com o pranchamento estimado pela taxa de volta
+    units: deg
+    encoding: bnr
+    scale: 0.087890625
+    locations: [{subframe: all, word: [36, 164]}]
+  Vertical Acceleration:
+    description: Aceleração vertical (8 Hz). Evidência - 250 contagens = 1,00 g no solo e em cruzeiro
+    units: g
+    encoding: bnr
+    scale: 0.004
+    locations: [{subframe: all, word: [2, 34, 66, 98, 130, 162, 194, 226]}]
+  Latitude:
+    description: Latitude (palavra grossa + fina). Evidência - FNLU, LFPB e CYUL nas paragens
+    units: deg
+    encoding: bnr
+    scale: 0.087890625
+    fine_offset: 1
+    locations: [{subframe: 3, word: 243}]
+  Longitude:
+    description: Longitude (palavra grossa + fina)
+    units: deg
+    encoding: bnr
+    scale: 0.087890625
+    fine_offset: 1
+    locations: [{subframe: 4, word: 243}]
+
+derived:
+  Absolute Roll Angle: "abs([Roll Angle])"
+  Absolute Vertical Speed: "abs([Vertical Speed])"
+  Pitch Rate: "rate([Pitch Angle])"
+  Absolute Turn Rate: "abs_rate_wrap([Heading])"
+  AIR GROUND: "[Radio Height] < 5"

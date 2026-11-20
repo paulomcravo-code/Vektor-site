@@ -1,0 +1,104 @@
+# ---------------------------------------------------------------------------
+# LFL / Data Frame Layout DE EXEMPLO (ATR 72, 64 palavras por segundo).
+# ATENÇÃO: estas localizações e escalas são fictícias e servem só para teste.
+# Para dados reais, substitua pelo documento do fabricante/instalador
+# (ex.: Dataframe Layout do FDAU/FDIMU, ou ficheiro .FAP/.LFL do fornecedor).
+# Um parâmetro mal mapeado produz valores plausíveis mas errados: valide
+# cada parâmetro contra um voo conhecido antes de uso operacional.
+# ---------------------------------------------------------------------------
+aircraft_type: "ATR 72-600 (exemplo)"
+words_per_second: 64
+storage: word16          # word16 = 12 bits úteis em palavras de 16 bits | packed12
+byte_order: little
+
+parameters:
+  ALT_STD:
+    description: Altitude-pressão (1013 hPa)
+    units: ft
+    encoding: unsigned
+    bits: [12, 1]
+    scale: 16
+    offset: -1000
+    locations: [{subframe: all, word: 2}]
+  IAS:
+    description: Velocidade indicada
+    units: kt
+    encoding: unsigned
+    bits: [12, 1]
+    scale: 0.125
+    locations: [{subframe: all, word: 3}]
+  RALT:
+    description: Altitude-rádio
+    units: ft
+    encoding: unsigned
+    bits: [12, 1]
+    scale: 1
+    locations: [{subframe: all, word: 4}]
+  PITCH:
+    description: Atitude de picada
+    units: deg
+    encoding: bnr
+    bits: [12, 1]
+    scale: 0.087890625
+    locations: [{subframe: all, word: [5, 21, 37, 53]}]
+  ROLL:
+    description: Ângulo de pranchamento
+    units: deg
+    encoding: bnr
+    bits: [12, 1]
+    scale: 0.087890625
+    locations: [{subframe: all, word: [6, 22, 38, 54]}]
+  VRTG:
+    description: Aceleração vertical
+    units: g
+    encoding: bnr
+    bits: [12, 1]
+    scale: 0.002
+    locations: [{subframe: all, word: [7, 15, 23, 31, 39, 47, 55, 63]}]
+  HEADING:
+    description: Rumo magnético
+    units: deg
+    encoding: unsigned
+    bits: [12, 1]
+    scale: 0.087890625
+    locations: [{subframe: all, word: 8}]
+  AIR_GND:
+    description: Discreto ar/solo (1 = no ar)
+    units: ""
+    encoding: discrete
+    bits: [1, 1]
+    locations: [{subframe: all, word: 9}]
+  FLAP:
+    description: Posição de flaps
+    units: deg
+    encoding: unsigned
+    bits: [12, 1]
+    scale: 0.1
+    locations: [{subframe: all, word: 10}]
+  GEAR:
+    description: Trem em baixo e bloqueado (1 = em baixo)
+    units: ""
+    encoding: discrete
+    bits: [1, 1]
+    locations: [{subframe: all, word: 11}]
+  TQ1:
+    description: Binário motor 1
+    units: "%"
+    encoding: unsigned
+    bits: [12, 1]
+    scale: 0.05
+    locations: [{subframe: all, word: 12}]
+  GS:
+    description: Velocidade solo
+    units: kt
+    encoding: unsigned
+    bits: [12, 1]
+    scale: 0.25
+    locations: [{subframe: 1, word: 13}, {subframe: 3, word: 13}]
+  GSDEV:
+    description: Desvio de glideslope
+    units: dots
+    encoding: bnr
+    bits: [12, 1]
+    scale: 0.002
+    locations: [{subframe: all, word: 14}]

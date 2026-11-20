@@ -1,0 +1,1917 @@
+# Importado de 09c054f1-Event_Set_Summary.pdf (Event Set Summary, PDF)
+# Aeronave: Boeing 737-700 BBJ
+# ATENÇÃO: operador, fases e faixas de altura INFERIDOS do nome do evento (inferred: true).
+# Confirmar com a exportação 'Event Set Details' do fornecedor antes de uso operacional.
+aircraft: Boeing 737-700 BBJ
+source: 09c054f1-Event_Set_Summary.pdf
+events:
+- id: 6-FHSP-ACT
+  code: 6-FHSP-ACT
+  name: Takeoff Configuration Warning
+  category: Descolagem
+  parameter: Configuration Warning
+  op: '>'
+  mode: max
+  thresholds:
+  - null
+  - null
+  - 0.5
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases:
+  - TAXI_OUT
+  - TAKEOFF
+  conditions: []
+  detection: ''
+  description: ''
+  inferred: true
+  mitigation: &id001
+    1:
+    - Registar em tendência mensal por aeroporto, procedimento e tipo de operação.
+    - Incluir o tema na próxima comunicação de Safety Promotion se a tendência subir.
+    2:
+    - Revisão pela equipa FDM com validação dos dados e contexto (meteorologia, ATC, NOTAM).
+    - Contacto confidencial à tripulação através do gatekeeper.
+    - Verificar conformidade com o SOP e propor reforço em briefing ou treino recorrente.
+    3:
+    - Comunicar ao Safety Manager em 24 h e abrir investigação no SMS.
+    - Avaliar obrigação de reporte MOR ao abrigo do Reg. (UE) 376/2014 (72 h).
+    - Avaliar inspeção de Manutenção quando aplicável (AMM) e treino adicional da tripulação.
+- id: 5-FHSP-ACT
+  code: 5-FHSP-ACT
+  name: Overspeed Warning
+  category: Velocidade
+  parameter: Overspeed Warning
+  op: '>'
+  mode: max
+  thresholds:
+  - null
+  - 0.5
+  - 0.5
+  durations:
+  - 0.0
+  - 1.0
+  - 3.0
+  phases: []
+  conditions: []
+  detection: ''
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 1-FRTO-ACT
+  code: 1-FRTO-ACT
+  name: Rejected Takeoff
+  category: Descolagem
+  parameter: Computed Airspeed
+  op: '>'
+  mode: max
+  thresholds:
+  - 50.0
+  - 80.0
+  - 100.0
+  durations:
+  - 3.0
+  - 3.0
+  - 3.0
+  phases:
+  - TAKEOFF
+  conditions: []
+  detection: '[Event Set Details definition] > 0'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 52-FHSP-ACT
+  code: 52-FHSP-ACT
+  name: Taxi Speed Exceedance In Turn
+  category: Solo
+  parameter: Groundspeed
+  op: '>'
+  mode: max
+  thresholds:
+  - 15.0
+  - 18.0
+  - 21.0
+  durations:
+  - 3.0
+  - 3.0
+  - 3.0
+  phases:
+  - TAXI_OUT
+  - TAXI_IN
+  conditions: []
+  detection: '[Event Set Details definition] > 0'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 9-FLAND-ACT
+  code: 9-FLAND-ACT
+  name: Questionable Braking at Landing
+  category: Aterragem
+  parameter: Longitudinal Acceleration
+  op: <
+  mode: min
+  thresholds:
+  - -0.35
+  - -0.4
+  - -0.45
+  durations:
+  - 3.0
+  - 3.0
+  - 3.0
+  phases:
+  - LANDING
+  conditions: []
+  detection: ''
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 4-FPTCH-ACT
+  code: 4-FPTCH-ACT
+  name: High Pitch Angle at Takeoff
+  category: Controlo de voo
+  parameter: Pitch Angle
+  op: '>'
+  mode: max
+  thresholds:
+  - null
+  - null
+  - 11.0
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases:
+  - TAKEOFF
+  conditions: []
+  detection: '[AIR GROUND] > 0.5'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 6-FPTCH-ACT
+  code: 6-FPTCH-ACT
+  name: Low Pitch Angle at Touchdown
+  category: Controlo de voo
+  parameter: Pitch Angle
+  op: <
+  mode: min
+  thresholds:
+  - 2.0
+  - 1.0
+  - 0.5
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases:
+  - LANDING
+  conditions: []
+  detection: '[AIR GROUND] > 0.5 AND [AIR GROUND(-4)] < 0.5'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 14-FROLL-ACT
+  code: 14-FROLL-ACT
+  name: Excessive Bank Angle on Approach Below 100 ft
+  category: Controlo de voo
+  parameter: Absolute Roll Angle
+  op: '>'
+  mode: max
+  thresholds:
+  - 6.0
+  - 8.0
+  - 10.0
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases:
+  - APPROACH
+  conditions: []
+  detection: '[Height Above Airfield] < 100'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 17-FROLL-ACT
+  code: 17-FROLL-ACT
+  name: Excessive Bank Angle on Approach Between 400 ft and 100 ft
+  category: Controlo de voo
+  parameter: Absolute Roll Angle
+  op: '>'
+  mode: max
+  thresholds:
+  - 10.0
+  - 15.0
+  - 20.0
+  durations:
+  - 3.0
+  - 3.0
+  - 3.0
+  phases:
+  - APPROACH
+  conditions: []
+  detection: '[Height Above Airfield] >= 100 AND [Height Above Airfield] < 400'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 16-FROLL-ACT
+  code: 16-FROLL-ACT
+  name: Excessive Bank Angle on Approach Between 1000 ft and 400 ft
+  category: Controlo de voo
+  parameter: Absolute Roll Angle
+  op: '>'
+  mode: max
+  thresholds:
+  - 25.0
+  - 30.0
+  - 35.0
+  durations:
+  - 3.0
+  - 3.0
+  - 3.0
+  phases:
+  - APPROACH
+  conditions: []
+  detection: '[Height Above Airfield] >= 400 AND [Height Above Airfield] < 1000'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 12-FROLL-ACT
+  code: 12-FROLL-ACT
+  name: Excessive Bank Angle Above 1000 ft
+  category: Controlo de voo
+  parameter: Absolute Roll Angle
+  op: '>'
+  mode: max
+  thresholds:
+  - 32.0
+  - 36.0
+  - 40.0
+  durations:
+  - 3.0
+  - 3.0
+  - 3.0
+  phases: []
+  conditions: []
+  detection: '[Height Above Airfield] > 1000'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 10-FROLL-ACT
+  code: 10-FROLL-ACT
+  name: Excessive Bank Angle During Climb Below 100 ft
+  category: Controlo de voo
+  parameter: Absolute Roll Angle
+  op: '>'
+  mode: max
+  thresholds:
+  - 6.0
+  - 8.0
+  - 10.0
+  durations:
+  - 3.0
+  - 3.0
+  - 3.0
+  phases:
+  - INITIAL_CLIMB
+  - CLIMB
+  conditions: []
+  detection: '[Height Above Airfield] < 100'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 11-FROLL-ACT
+  code: 11-FROLL-ACT
+  name: Excessive Bank Angle During Climb Between 100 ft and 400 ft
+  category: Controlo de voo
+  parameter: Absolute Roll Angle
+  op: '>'
+  mode: max
+  thresholds:
+  - 15.0
+  - 20.0
+  - 25.0
+  durations:
+  - 3.0
+  - 3.0
+  - 3.0
+  phases:
+  - INITIAL_CLIMB
+  - CLIMB
+  conditions: []
+  detection: '[Height Above Airfield] >= 100 AND [Height Above Airfield] < 400'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 18-FROLL-ACT
+  code: 18-FROLL-ACT
+  name: Excessive Bank Angle During Climb Between 400 ft and 1000 ft
+  category: Controlo de voo
+  parameter: Absolute Roll Angle
+  op: '>'
+  mode: max
+  thresholds:
+  - 25.0
+  - 30.0
+  - 35.0
+  durations:
+  - 3.0
+  - 3.0
+  - 3.0
+  phases:
+  - INITIAL_CLIMB
+  - CLIMB
+  conditions: []
+  detection: '[Height Above Airfield] >= 400 AND [Height Above Airfield] < 1000'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 19-FROLL-ACT
+  code: 19-FROLL-ACT
+  name: Significant Roll During Flare Below 10 ft
+  category: Controlo de voo
+  parameter: Absolute Roll Angle
+  op: '>'
+  mode: max
+  thresholds:
+  - 5.0
+  - 7.0
+  - 9.0
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases:
+  - LANDING
+  conditions: []
+  detection: '[Height Above Airfield] < 10'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 19-FVSP-ACT
+  code: 19-FVSP-ACT
+  name: Level Flight Below 1400 ft
+  category: Operação
+  parameter: Absolute Vertical Speed
+  op: '>'
+  mode: max
+  thresholds:
+  - 200.0
+  - null
+  - null
+  durations:
+  - 5.0
+  - 0.0
+  - 0.0
+  phases:
+  - APPROACH
+  conditions: []
+  detection: '[Height Above Airfield] < 1400'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 18-FVSP-ACT
+  code: 18-FVSP-ACT
+  name: High Rate of Descent on Approach Above 2000 ft
+  category: Aproximação
+  parameter: Vertical Speed
+  op: <
+  mode: min
+  thresholds:
+  - -2000.0
+  - -2500.0
+  - -3000.0
+  durations:
+  - 3.0
+  - 3.0
+  - 3.0
+  phases:
+  - APPROACH
+  conditions: []
+  detection: '[Height Above Airfield] > 2000'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 15-FVSP-ACT
+  code: 15-FVSP-ACT
+  name: High Rate of Descent on Approach Between 2000 ft and 1000 ft
+  category: Aproximação
+  parameter: Vertical Speed
+  op: <
+  mode: min
+  thresholds:
+  - -1500.0
+  - -2000.0
+  - -2500.0
+  durations:
+  - 5.0
+  - 5.0
+  - 3.0
+  phases:
+  - APPROACH
+  conditions: []
+  detection: '[Height Above Airfield] >= 1000 AND [Height Above Airfield] < 2000'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 9-FVSP-ACT
+  code: 9-FVSP-ACT
+  name: High Rate of Descent on Approach Between 1000 ft and 500 ft
+  category: Aproximação
+  parameter: Vertical Speed
+  op: <
+  mode: min
+  thresholds:
+  - -1100.0
+  - -1300.0
+  - -1500.0
+  durations:
+  - 3.0
+  - 3.0
+  - 3.0
+  phases:
+  - APPROACH
+  conditions: []
+  detection: '[Height Above Airfield] >= 500 AND [Height Above Airfield] < 1000'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 8-FVSP-ACT
+  code: 8-FVSP-ACT
+  name: High Rate of Descent on Approach Between 500 ft and 50 ft
+  category: Aproximação
+  parameter: Vertical Speed
+  op: <
+  mode: min
+  thresholds:
+  - -1000.0
+  - -1100.0
+  - -1300.0
+  durations:
+  - 3.0
+  - 3.0
+  - 3.0
+  phases:
+  - APPROACH
+  conditions: []
+  detection: '[Height Above Airfield] >= 50 AND [Height Above Airfield] < 500'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 11-FVSP-ACT
+  code: 11-FVSP-ACT
+  name: Low Rate of Climb After Takeoff or Go Around
+  category: Descolagem
+  parameter: Vertical Speed
+  op: <
+  mode: min
+  thresholds:
+  - 1000.0
+  - 750.0
+  - 500.0
+  durations:
+  - 5.0
+  - 5.0
+  - 5.0
+  phases:
+  - INITIAL_CLIMB
+  - GO_AROUND
+  conditions: []
+  detection: ''
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 6-FACC-ACT
+  code: 6-FACC-ACT
+  name: High Vertical Acceleration During Rotation
+  category: Descolagem
+  parameter: Vertical Acceleration
+  op: '>'
+  mode: max
+  thresholds:
+  - 1.35
+  - 1.4
+  - 1.45
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases:
+  - TAKEOFF
+  - INITIAL_CLIMB
+  conditions: []
+  detection: ''
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 1-FFC-ACT
+  code: 1-FFC-ACT
+  name: Early Flap/Slat Retraction After Takeoff
+  category: Descolagem
+  parameter: Height Above Airfield
+  op: <
+  mode: min
+  thresholds:
+  - 800.0
+  - 700.0
+  - 500.0
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases:
+  - INITIAL_CLIMB
+  conditions: []
+  detection: '[Event Set Details definition] > 0'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 2-FFC-ACT
+  code: 2-FFC-ACT
+  name: Late Landing Flap Setting
+  category: Aterragem
+  parameter: Height Above Airfield
+  op: <
+  mode: min
+  thresholds:
+  - 1000.0
+  - 750.0
+  - 500.0
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases:
+  - APPROACH
+  conditions: []
+  detection: '[Event Set Details definition] > 0'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 1-FSB-ACT
+  code: 1-FSB-ACT
+  name: Speed Brake Use Below 1000 ft
+  category: Velocidade
+  parameter: Speed Brake Handle Position
+  op: '>'
+  mode: max
+  thresholds:
+  - null
+  - null
+  - 8.0
+  durations:
+  - 0.0
+  - 0.0
+  - 3.0
+  phases: []
+  conditions: []
+  detection: '[Height Above Airfield] < 1000'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 4-FSB-ACT
+  code: 4-FSB-ACT
+  name: Speed Brake Extended Above Idle Thrust
+  category: Velocidade
+  parameter: Speed Brake Handle Position
+  op: '>'
+  mode: max
+  thresholds:
+  - null
+  - null
+  - 10.0
+  durations:
+  - 0.0
+  - 0.0
+  - 40.0
+  phases: []
+  conditions: []
+  detection: '[Event Set Details definition] > 0'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 7-FPOW-ACT
+  code: 7-FPOW-ACT
+  name: Thrust Asymmetry on Approach
+  category: Aproximação
+  parameter: Engine Asymmetry
+  op: '>'
+  mode: max
+  thresholds:
+  - 10.0
+  - 10.0
+  - 10.0
+  durations:
+  - 10.0
+  - 30.0
+  - 60.0
+  phases:
+  - APPROACH
+  conditions: []
+  detection: ''
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 6-FPOW-ACT
+  code: 6-FPOW-ACT
+  name: Thrust Asymmetry in Reverse
+  category: Motores
+  parameter: Engine Asymmetry
+  op: '>'
+  mode: max
+  thresholds:
+  - 10.0
+  - 10.0
+  - 10.0
+  durations:
+  - 5.0
+  - 10.0
+  - 15.0
+  phases:
+  - LANDING
+  conditions: []
+  detection: '[Event Set Details definition] > 0'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 1-FPOT-ACT
+  code: 1-FPOT-ACT
+  name: Thrust High on Ground During Taxi
+  category: Solo
+  parameter: N1 Engine 1
+  op: '>'
+  mode: max
+  thresholds:
+  - 42.0
+  - 45.0
+  - 50.0
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases:
+  - TAXI_OUT
+  - TAXI_IN
+  conditions: []
+  detection: ''
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 1-FTCAS-ACT
+  code: 1-FTCAS-ACT
+  name: TCAS RA Warning
+  category: Avisos
+  parameter: TCAS Warning
+  op: '>'
+  mode: max
+  thresholds:
+  - null
+  - null
+  - 0.5
+  durations:
+  - 0.0
+  - 0.0
+  - 3.0
+  phases: []
+  conditions: []
+  detection: ''
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 4-FGPWS-ACT
+  code: 4-FGPWS-ACT
+  name: GPWS Warning Above 1000 ft
+  category: Avisos
+  parameter: GPWS Warning
+  op: '>'
+  mode: max
+  thresholds:
+  - null
+  - null
+  - 0.5
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases: []
+  conditions: []
+  detection: '[Height Above Airfield] > 1000'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 9-FGPWS-ACT
+  code: 9-FGPWS-ACT
+  name: GPWS Warning Between 500 ft and 1000 ft
+  category: Avisos
+  parameter: GPWS Warning
+  op: '>'
+  mode: max
+  thresholds:
+  - null
+  - null
+  - 0.5
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases: []
+  conditions: []
+  detection: '[Height Above Airfield] >= 500 AND [Height Above Airfield] < 1000'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 6-FGPWS-ACT
+  code: 6-FGPWS-ACT
+  name: GPWS Warning Below 500 ft
+  category: Avisos
+  parameter: GPWS Warning
+  op: '>'
+  mode: max
+  thresholds:
+  - null
+  - null
+  - 0.5
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases: []
+  conditions: []
+  detection: '[Height Above Airfield] < 500'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 8-FFC-ACT
+  code: 8-FFC-ACT
+  name: Landing Gear Not Locked Down Below 1000 ft
+  category: Aterragem
+  parameter: Left Gear Down
+  op: '>'
+  mode: max
+  thresholds:
+  - null
+  - null
+  - 0.5
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases: []
+  conditions: []
+  detection: '[Event Set Details definition] > 0'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 3-FGPWS-ACT
+  code: 3-FGPWS-ACT
+  name: GPWS Windshear Warning
+  category: Avisos
+  parameter: Windshear Warning
+  op: '>'
+  mode: max
+  thresholds:
+  - null
+  - null
+  - 0.5
+  durations:
+  - 0.0
+  - 0.0
+  - 0.5
+  phases: []
+  conditions: []
+  detection: ''
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 49-FHSP-ACT
+  code: 49-FHSP-ACT
+  name: Tire Limit Speed High
+  category: Velocidade
+  parameter: Groundspeed
+  op: '>'
+  mode: max
+  thresholds:
+  - null
+  - null
+  - 195.0
+  durations:
+  - 0.0
+  - 0.0
+  - 3.0
+  phases: []
+  conditions: []
+  detection: '[Event Set Details definition] > 0'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 2-FWARN-ACT
+  code: 2-FWARN-ACT
+  name: Lav Smoke Warning
+  category: Operação
+  parameter: Lav Smoke Warning
+  op: '>'
+  mode: max
+  thresholds:
+  - null
+  - null
+  - 0.5
+  durations:
+  - 0.0
+  - 0.0
+  - 5.0
+  phases: []
+  conditions: []
+  detection: ''
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 4-FACC-ACT
+  code: 4-FACC-ACT
+  name: High Vertical Acceleration in Flight - w/Flaps
+  category: Configuração
+  parameter: Vertical Acceleration
+  op: '>'
+  mode: max
+  thresholds:
+  - 1.4
+  - 1.6
+  - 1.8
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases:
+  - INITIAL_CLIMB
+  - CLIMB
+  - CRUISE
+  - DESCENT
+  - APPROACH
+  conditions: []
+  detection: '[Event Set Details definition] > 0'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 7-FACC-ACT
+  code: 7-FACC-ACT
+  name: Low Vertical Acceleration in Flight
+  category: Cargas
+  parameter: Vertical Acceleration
+  op: <
+  mode: min
+  thresholds:
+  - 0.0
+  - -0.5
+  - -1.0
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases:
+  - INITIAL_CLIMB
+  - CLIMB
+  - CRUISE
+  - DESCENT
+  - APPROACH
+  conditions: []
+  detection: ''
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 1-FGHS-ACT
+  code: 1-FGHS-ACT
+  name: Gear Extension Above VLO
+  category: Configuração
+  parameter: Computed Airspeed
+  op: '>'
+  mode: max
+  thresholds:
+  - null
+  - null
+  - 270.0
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases: []
+  conditions: []
+  detection: '[Event Set Details definition] > 0'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 28-FPTCH-ACT
+  code: 28-FPTCH-ACT
+  name: High Pitch Rate at Takeoff
+  category: Controlo de voo
+  parameter: Pitch Rate
+  op: '>'
+  mode: max
+  thresholds:
+  - null
+  - 3.5
+  - 4.0
+  durations:
+  - 0.0
+  - 1.0
+  - 1.0
+  phases:
+  - TAKEOFF
+  conditions: []
+  detection: '[AIR GROUND] > 0.5'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 14-FPTCH-ACT
+  code: 14-FPTCH-ACT
+  name: High Pitch Angle on Initial Climb Below 400 ft
+  category: Controlo de voo
+  parameter: Pitch Angle
+  op: '>'
+  mode: max
+  thresholds:
+  - 21.0
+  - 23.0
+  - 25.0
+  durations:
+  - 3.0
+  - 3.0
+  - 3.0
+  phases:
+  - INITIAL_CLIMB
+  conditions: []
+  detection: '[Height Above Airfield] < 400'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 13-FPTCH-ACT
+  code: 13-FPTCH-ACT
+  name: Low Pitch Angle on Initial Climb Below 400 ft
+  category: Controlo de voo
+  parameter: Pitch Angle
+  op: <
+  mode: min
+  thresholds:
+  - null
+  - null
+  - 6.0
+  durations:
+  - 0.0
+  - 0.0
+  - 3.0
+  phases:
+  - INITIAL_CLIMB
+  conditions: []
+  detection: '[Height Above Airfield] < 400'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 5-FPTCH-ACT
+  code: 5-FPTCH-ACT
+  name: High Pitch Angle at Touchdown
+  category: Controlo de voo
+  parameter: Pitch Angle
+  op: '>'
+  mode: max
+  thresholds:
+  - 8.0
+  - 8.5
+  - 9.0
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases:
+  - LANDING
+  conditions: []
+  detection: '[AIR GROUND] > 0.5 AND [AIR GROUND(-4)] < 0.5'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 2-FACC-ACT
+  code: 2-FACC-ACT
+  name: High Vertical Acceleration in Flight
+  category: Cargas
+  parameter: Vertical Acceleration
+  op: '>'
+  mode: max
+  thresholds:
+  - 1.6
+  - 1.8
+  - 2.0
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases:
+  - INITIAL_CLIMB
+  - CLIMB
+  - CRUISE
+  - DESCENT
+  - APPROACH
+  conditions: []
+  detection: ''
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 3-FACC-ACT
+  code: 3-FACC-ACT
+  name: High Vertical Acceleration on Landing
+  category: Aterragem
+  parameter: Vertical Acceleration
+  op: '>'
+  mode: max
+  thresholds:
+  - 1.6
+  - 1.8
+  - 2.0
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases:
+  - LANDING
+  conditions: []
+  detection: '[AIR GROUND] > 0.5 AND [AIR GROUND(-4)] < 0.5'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 2-FPOW-ACT
+  code: 2-FPOW-ACT
+  name: Low Power on Short Final Below 500 ft
+  category: Operação
+  parameter: ([N1 Engine 1] + [N1 Engine 2]) / 2
+  op: <
+  mode: min
+  thresholds:
+  - 35.0
+  - 33.0
+  - 30.0
+  durations:
+  - 5.0
+  - 5.0
+  - 5.0
+  phases:
+  - APPROACH
+  conditions: []
+  detection: '[Event Set Details definition] > 0'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 27-FPTCH-ACT
+  code: 27-FPTCH-ACT
+  name: High Pitch Rate at Landing
+  category: Controlo de voo
+  parameter: Pitch Rate
+  op: '>'
+  mode: max
+  thresholds:
+  - null
+  - 3.0
+  - 3.5
+  durations:
+  - 0.0
+  - 1.0
+  - 1.0
+  phases:
+  - LANDING
+  conditions: []
+  detection: ''
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 3-FAP-ACT
+  code: 3-FAP-ACT
+  name: AP Disengaged Late on Approach
+  category: Aproximação
+  parameter: Height Above Airfield
+  op: <
+  mode: min
+  thresholds:
+  - null
+  - null
+  - 80.0
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases:
+  - APPROACH
+  conditions: []
+  detection: '[Event Set Details definition] > 0'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 2-FAP-ACT
+  code: 2-FAP-ACT
+  name: AP Engaged Early After Takeoff
+  category: Descolagem
+  parameter: Height Above Airfield
+  op: <
+  mode: min
+  thresholds:
+  - null
+  - 400.0
+  - 100.0
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases:
+  - INITIAL_CLIMB
+  conditions: []
+  detection: '[Event Set Details definition] > 0'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 59-FENG-ACT
+  code: 59-FENG-ACT
+  name: Engine 1 High N2 Vibration
+  category: Motores
+  parameter: CN2 Vibration Engine 1
+  op: '>'
+  mode: max
+  thresholds:
+  - 3.0
+  - 3.5
+  - 4.0
+  durations:
+  - 3.0
+  - 3.0
+  - 3.0
+  phases: []
+  conditions: []
+  detection: ''
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 54-FENG-ACT
+  code: 54-FENG-ACT
+  name: Engine 1 High N1 Vibration
+  category: Motores
+  parameter: CN1 Vibration Engine 1
+  op: '>'
+  mode: max
+  thresholds:
+  - 3.0
+  - 3.5
+  - 4.0
+  durations:
+  - 3.0
+  - 3.0
+  - 3.0
+  phases: []
+  conditions: []
+  detection: ''
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 55-FENG-ACT
+  code: 55-FENG-ACT
+  name: Engine 2 High N1 Vibration
+  category: Motores
+  parameter: CN1 Vibration Engine 2
+  op: '>'
+  mode: max
+  thresholds:
+  - 3.0
+  - 3.5
+  - 4.0
+  durations:
+  - 3.0
+  - 3.0
+  - 3.0
+  phases: []
+  conditions: []
+  detection: ''
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 60-FENG-ACT
+  code: 60-FENG-ACT
+  name: Engine 2 High N2 Vibration
+  category: Motores
+  parameter: CN2 Vibration Engine 2
+  op: '>'
+  mode: max
+  thresholds:
+  - 3.0
+  - 3.5
+  - 4.0
+  durations:
+  - 3.0
+  - 3.0
+  - 3.0
+  phases: []
+  conditions: []
+  detection: ''
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 58-FENG-ACT
+  code: 58-FENG-ACT
+  name: Engine Failure
+  category: Motores
+  parameter: Engine Asymmetry
+  op: '>'
+  mode: max
+  thresholds:
+  - null
+  - null
+  - 30.0
+  durations:
+  - 0.0
+  - 0.0
+  - 3.0
+  phases: []
+  conditions: []
+  detection: ''
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 65-FENG-ACT
+  code: 65-FENG-ACT
+  name: Excessive EGT at Takeoff or Go Around Engine 1
+  category: Descolagem
+  parameter: EGT Engine 1
+  op: '>'
+  mode: max
+  thresholds:
+  - null
+  - 895.0
+  - 900.0
+  durations:
+  - 0.0
+  - 3.0
+  - 3.0
+  phases:
+  - TAKEOFF
+  - GO_AROUND
+  conditions: []
+  detection: '[AIR GROUND] > 0.5'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 66-FENG-ACT
+  code: 66-FENG-ACT
+  name: Excessive EGT at Takeoff or Go Around Engine 2
+  category: Descolagem
+  parameter: EGT Engine 2
+  op: '>'
+  mode: max
+  thresholds:
+  - null
+  - 895.0
+  - 900.0
+  durations:
+  - 0.0
+  - 3.0
+  - 3.0
+  phases:
+  - TAKEOFF
+  - GO_AROUND
+  conditions: []
+  detection: '[AIR GROUND] > 0.5'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 1-FFHS-ACT
+  code: 1-FFHS-ACT
+  name: Flap 1 Speed Exceeded
+  category: Velocidade
+  parameter: Computed Airspeed
+  op: '>'
+  mode: max
+  thresholds:
+  - null
+  - null
+  - 250.0
+  durations:
+  - 0.0
+  - 0.0
+  - 3.0
+  phases: []
+  conditions: []
+  detection: '[Event Set Details definition] > 0'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 3-FFHS-ACT
+  code: 3-FFHS-ACT
+  name: Flap 10 Speed Exceeded
+  category: Velocidade
+  parameter: Computed Airspeed
+  op: '>'
+  mode: max
+  thresholds:
+  - null
+  - null
+  - 210.0
+  durations:
+  - 0.0
+  - 0.0
+  - 3.0
+  phases: []
+  conditions: []
+  detection: '[Event Set Details definition] > 0'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 4-FFHS-ACT
+  code: 4-FFHS-ACT
+  name: Flap 15 Speed Exceeded
+  category: Velocidade
+  parameter: Computed Airspeed
+  op: '>'
+  mode: max
+  thresholds:
+  - null
+  - null
+  - 200.0
+  durations:
+  - 0.0
+  - 0.0
+  - 3.0
+  phases: []
+  conditions: []
+  detection: '[Event Set Details definition] > 0'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 7-FFHS-ACT
+  code: 7-FFHS-ACT
+  name: Flap 30 Speed Exceeded
+  category: Velocidade
+  parameter: Computed Airspeed
+  op: '>'
+  mode: max
+  thresholds:
+  - null
+  - null
+  - 175.0
+  durations:
+  - 0.0
+  - 0.0
+  - 3.0
+  phases: []
+  conditions: []
+  detection: '[Event Set Details definition] > 0'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 10-FFHS-ACT
+  code: 10-FFHS-ACT
+  name: Flap 40 Speed Exceeded
+  category: Velocidade
+  parameter: Computed Airspeed
+  op: '>'
+  mode: max
+  thresholds:
+  - null
+  - null
+  - 162.0
+  durations:
+  - 0.0
+  - 0.0
+  - 3.0
+  phases: []
+  conditions: []
+  detection: '[Event Set Details definition] > 0'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 2-FFHS-ACT
+  code: 2-FFHS-ACT
+  name: Flap 5 Speed Exceeded
+  category: Velocidade
+  parameter: Computed Airspeed
+  op: '>'
+  mode: max
+  thresholds:
+  - null
+  - null
+  - 250.0
+  durations:
+  - 0.0
+  - 0.0
+  - 3.0
+  phases: []
+  conditions: []
+  detection: '[Event Set Details definition] > 0'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 6-FFHS-ACT
+  code: 6-FFHS-ACT
+  name: Flap 25 Speed Exceeded
+  category: Velocidade
+  parameter: Computed Airspeed
+  op: '>'
+  mode: max
+  thresholds:
+  - null
+  - null
+  - 190.0
+  durations:
+  - 0.0
+  - 0.0
+  - 3.0
+  phases: []
+  conditions: []
+  detection: '[Event Set Details definition] > 0'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 21-FFHS-ACT
+  code: 21-FFHS-ACT
+  name: Flap Altitude Limit Exceeded
+  category: Configuração
+  parameter: Pressure Altitude
+  op: '>'
+  mode: max
+  thresholds:
+  - 19100.0
+  - 19700.0
+  - 20000.0
+  durations:
+  - 5.0
+  - 5.0
+  - 5.0
+  phases: []
+  conditions: []
+  detection: '[Event Set Details definition] > 0'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 4-FGHS-ACT
+  code: 4-FGHS-ACT
+  name: Gear Down Speed Exceeded (VLE)
+  category: Velocidade
+  parameter: Computed Airspeed
+  op: '>'
+  mode: max
+  thresholds:
+  - null
+  - null
+  - 320.0
+  durations:
+  - 0.0
+  - 0.0
+  - 3.0
+  phases: []
+  conditions: []
+  detection: '[Event Set Details definition] > 0'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 2-FGHS-ACT
+  code: 2-FGHS-ACT
+  name: Gear Retraction Above VLO
+  category: Configuração
+  parameter: Computed Airspeed
+  op: '>'
+  mode: max
+  thresholds:
+  - null
+  - null
+  - 235.0
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases: []
+  conditions: []
+  detection: '[Event Set Details definition] > 0'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 9-FFC-ACT
+  code: 9-FFC-ACT
+  name: Incorrect Landing Flap
+  category: Aterragem
+  parameter: Flap Position
+  op: '>'
+  mode: max
+  thresholds:
+  - null
+  - 29.0
+  - null
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases: []
+  conditions: []
+  detection: '[Event Set Details definition] > 0'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 5-FACC-ACT
+  code: 5-FACC-ACT
+  name: Low Vertical Acceleration in Flight - w/Flaps
+  category: Configuração
+  parameter: Vertical Acceleration
+  op: <
+  mode: min
+  thresholds:
+  - 0.0
+  - -0.5
+  - -1.0
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases:
+  - INITIAL_CLIMB
+  - CLIMB
+  - CRUISE
+  - DESCENT
+  - APPROACH
+  conditions: []
+  detection: '[Event Set Details definition] > 0'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 14-FHSP-ACT
+  code: 14-FHSP-ACT
+  name: Speed Exceedance MMO
+  category: Velocidade
+  parameter: MACH
+  op: '>'
+  mode: max
+  thresholds:
+  - null
+  - null
+  - 0.82
+  durations:
+  - 0.0
+  - 0.0
+  - 3.0
+  phases: []
+  conditions: []
+  detection: ''
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 1-FHSP-ACT
+  code: 1-FHSP-ACT
+  name: Speed Exceedance VMO
+  category: Velocidade
+  parameter: Computed Airspeed
+  op: '>'
+  mode: max
+  thresholds:
+  - null
+  - null
+  - 340.0
+  durations:
+  - 0.0
+  - 0.0
+  - 6.0
+  phases: []
+  conditions: []
+  detection: ''
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 1-FHT-ACT
+  code: 1-FHT-ACT
+  name: Maximum Operating Altitude Exceeded
+  category: Altitude
+  parameter: Pressure Altitude
+  op: '>'
+  mode: max
+  thresholds:
+  - null
+  - null
+  - 41500.0
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases: []
+  conditions: []
+  detection: ''
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 9-FGS-ACT
+  code: 9-FGS-ACT
+  name: Above Glideslope Deviation - Above 1000 ft
+  category: Aproximação
+  parameter: Glideslope Deviation
+  op: <
+  mode: min
+  thresholds:
+  - -0.5
+  - -1.0
+  - -1.5
+  durations:
+  - 3.0
+  - 3.0
+  - 3.0
+  phases: []
+  conditions: []
+  detection: '[Event Set Details definition] > 0'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 5-FGS-ACT
+  code: 5-FGS-ACT
+  name: Above Glideslope Deviation - Below 1000 ft
+  category: Aproximação
+  parameter: Glideslope Deviation
+  op: <
+  mode: min
+  thresholds:
+  - -0.5
+  - -1.0
+  - -1.5
+  durations:
+  - 3.0
+  - 3.0
+  - 3.0
+  phases: []
+  conditions: []
+  detection: '[Event Set Details definition] > 0'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 10-FGS-ACT
+  code: 10-FGS-ACT
+  name: Below Glideslope Deviation - Above 1000 ft
+  category: Aproximação
+  parameter: Glideslope Deviation
+  op: '>'
+  mode: max
+  thresholds:
+  - 0.5
+  - 1.0
+  - 1.5
+  durations:
+  - 3.0
+  - 3.0
+  - 3.0
+  phases: []
+  conditions: []
+  detection: '[Event Set Details definition] > 0'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 1-FGS-ACT
+  code: 1-FGS-ACT
+  name: Below Glideslope Deviation - Below 1000 ft
+  category: Aproximação
+  parameter: Glideslope Deviation
+  op: '>'
+  mode: max
+  thresholds:
+  - 0.5
+  - 1.0
+  - 1.5
+  durations:
+  - 3.0
+  - 3.0
+  - 3.0
+  phases: []
+  conditions: []
+  detection: '[Event Set Details definition] > 0'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 6-FLOC-ACT
+  code: 6-FLOC-ACT
+  name: Localizer Deviation Above 1000 ft
+  category: Aproximação
+  parameter: Absolute Localizer Deviation
+  op: '>'
+  mode: max
+  thresholds:
+  - 0.5
+  - 1.0
+  - 1.5
+  durations:
+  - 3.0
+  - 3.0
+  - 3.0
+  phases: []
+  conditions: []
+  detection: '[Event Set Details definition] > 0'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 1-FLOC-ACT
+  code: 1-FLOC-ACT
+  name: Localizer Deviation Below 1000 ft
+  category: Aproximação
+  parameter: Absolute Localizer Deviation
+  op: '>'
+  mode: max
+  thresholds:
+  - 0.5
+  - 1.0
+  - 1.5
+  durations:
+  - 3.0
+  - 3.0
+  - 3.0
+  phases: []
+  conditions: []
+  detection: '[Event Set Details definition] > 0'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 1-FWT-ACT
+  code: 1-FWT-ACT
+  name: Overweight Landing
+  category: Aterragem
+  parameter: Gross Weight
+  op: '>'
+  mode: max
+  thresholds:
+  - null
+  - null
+  - 134000.0
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases: []
+  conditions: []
+  detection: '[Event Set Details definition] > 0'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 1-FGA-ACT
+  code: 1-FGA-ACT
+  name: Go Around
+  category: Operação
+  parameter: Height Above Airfield
+  op: <
+  mode: min
+  thresholds:
+  - 2500.0
+  - 200.0
+  - null
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases:
+  - GO_AROUND
+  conditions: []
+  detection: '[Event Set Details definition] > 0'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 3-FFC-ACT
+  code: 3-FFC-ACT
+  name: Late Landing Gear Retraction
+  category: Aterragem
+  parameter: Height Above Airfield
+  op: '>'
+  mode: max
+  thresholds:
+  - 500.0
+  - 1000.0
+  - 1500.0
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases: []
+  conditions: []
+  detection: '[Event Set Details definition] > 0'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 20-FHSP-ACT
+  code: 20-FHSP-ACT
+  name: High Speed on Arrival Below 3000 ft
+  category: Velocidade
+  parameter: Computed Airspeed
+  op: '>'
+  mode: max
+  thresholds:
+  - 220.0
+  - 230.0
+  - 240.0
+  durations:
+  - 10.0
+  - 10.0
+  - 10.0
+  phases: []
+  conditions: []
+  detection: '[Height Above Airfield] < 3000'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 17-FVSP-ACT
+  code: 17-FVSP-ACT
+  name: High Rate of Descent Below 20 ft
+  category: Operação
+  parameter: Approach Slope
+  op: '>'
+  mode: max
+  thresholds:
+  - 2.25
+  - 2.65
+  - 3.0
+  durations:
+  - 1.0
+  - 1.0
+  - 1.0
+  phases: []
+  conditions: []
+  detection: '[Height Above Airfield] < 20'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 1-FLAND-ACT
+  code: 1-FLAND-ACT
+  name: Long Flare
+  category: Aterragem
+  parameter: AIR GROUND
+  op: '>'
+  mode: max
+  thresholds:
+  - null
+  - 0.5
+  - 0.5
+  durations:
+  - 0.0
+  - 8.0
+  - 10.0
+  phases:
+  - LANDING
+  conditions: []
+  detection: '[Event Set Details definition] > 0'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 53-FHSP-ACT
+  code: 53-FHSP-ACT
+  name: Taxi Speed Exceedance Straight
+  category: Solo
+  parameter: Groundspeed
+  op: '>'
+  mode: max
+  thresholds:
+  - 32.0
+  - 35.0
+  - 40.0
+  durations:
+  - 5.0
+  - 10.0
+  - 5.0
+  phases:
+  - TAXI_OUT
+  - TAXI_IN
+  conditions: []
+  detection: ''
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 4-FAP-ACT
+  code: 4-FAP-ACT
+  name: AP Disengaged in Cruise
+  category: Automatismos
+  parameter: AP Status
+  op: '>'
+  mode: max
+  thresholds:
+  - 0.5
+  - 0.5
+  - 0.5
+  durations:
+  - 180.0
+  - 900.0
+  - 1800.0
+  phases:
+  - CRUISE
+  conditions: []
+  detection: '[Event Set Details definition] > 0'
+  description: ''
+  inferred: true
+  mitigation: *id001
+- id: 5-FLAND-ACT
+  code: 5-FLAND-ACT
+  name: Long Landing
+  category: Aterragem
+  parameter: Touchdown Distance
+  op: '>'
+  mode: max
+  thresholds:
+  - 2500.0
+  - 3000.0
+  - 3500.0
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases:
+  - LANDING
+  conditions: []
+  detection: '[Event Set Details definition] > 0'
+  description: ''
+  inferred: true
+  mitigation: *id001

@@ -1,0 +1,2150 @@
+# Catálogo de eventos importado de cce47b5b-Event_Set_Details_GLEX.xlsx
+# Aeronave: Bombardier Global Express
+# Níveis: Low=1, Med=2, High=3; durações por nível em segundos.
+# Nomes de parâmetros iguais aos do fornecedor: o frame_layout.yaml tem de usar os mesmos nomes.
+aircraft: Bombardier Global Express
+source: cce47b5b-Event_Set_Details_GLEX.xlsx
+events:
+- id: 56B-BFY
+  code: 56B-BFY
+  name: Above Glideslope Deviation - Below 1000 ft
+  category: Aproximação
+  parameter: Glideslope Deviation
+  op: <
+  mode: min
+  thresholds:
+  - -1.25
+  - -1.5
+  - -1.75
+  durations:
+  - 3.0
+  - 3.0
+  - 3.0
+  phases:
+  - APPROACH
+  conditions:
+  - param: Radio Height
+    op: <
+    value: 1000.0
+  - param: Radio Height
+    op: '>'
+    value: 100.0
+  - param: Height Above Airfield
+    op: <
+    value: 1000.0
+  detection: '[Radio Height] < 1000 AND [Radio Height] > 100 AND [Height Above Airfield] < 1000'
+  description: ''
+  mitigation: &id001
+    1:
+    - Registar em tendência mensal por aeroporto, procedimento e tipo de operação.
+    - Incluir o tema na próxima comunicação de Safety Promotion se a tendência subir.
+    2:
+    - Revisão pela equipa FDM com validação dos dados e contexto (meteorologia, ATC, NOTAM).
+    - Contacto confidencial à tripulação através do gatekeeper.
+    - Verificar conformidade com o SOP e propor reforço em briefing ou treino recorrente.
+    3:
+    - Comunicar ao Safety Manager em 24 h e abrir investigação no SMS.
+    - Avaliar obrigação de reporte MOR ao abrigo do Reg. (UE) 376/2014 (72 h).
+    - Avaliar inspeção de Manutenção quando aplicável (AMM) e treino adicional da tripulação.
+- id: 57E-BFY
+  code: 57E-BFY
+  name: AP Disengaged - Above 18,000 ft
+  category: Automatismos
+  parameter: AP Status
+  op: <
+  mode: min
+  thresholds:
+  - 0.5
+  - 0.5
+  - 0.5
+  durations:
+  - 180.0
+  - 900.0
+  - 1800.0
+  phases:
+  - CRUISE
+  conditions:
+  - param: Pressure Altitude
+    op: '>'
+    value: 18000.0
+  detection: '[Pressure Altitude] > 18000'
+  description: Autopilot not engaged above 18,000 ft.
+  mitigation: *id001
+- id: 57C-BFY
+  code: 57C-BFY
+  name: AP Disengaged Late on Approach
+  category: Aproximação
+  parameter: Radio Height
+  op: <
+  mode: min
+  thresholds:
+  - null
+  - null
+  - 300.0
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases:
+  - APPROACH
+  conditions:
+  - param: AP Status
+    op: '>'
+    value: 0.5
+  - param: Radio Height
+    op: '>'
+    value: 5.0
+  detection: '[AP Status] > 0.5 AND [Radio Height] > 5'
+  description: ''
+  mitigation: *id001
+- id: 57B-BFY
+  code: 57B-BFY
+  name: AP Engaged Early After Takeoff
+  category: Descolagem
+  parameter: Radio Height
+  op: <
+  mode: min
+  thresholds:
+  - null
+  - null
+  - 100.0
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases:
+  - TAKEOFF
+  - INITIAL_CLIMB
+  conditions:
+  - param: AP Status
+    op: '>'
+    value: 0.5
+  - param: Radio Height
+    op: '>'
+    value: 5.0
+  detection: '[AP Status] > 0.5 AND [Radio Height] > 5'
+  description: ''
+  mitigation: *id001
+- id: 56A-BFY
+  code: 56A-BFY
+  name: Below Glideslope Deviation - Below 1000 ft
+  category: Aproximação
+  parameter: Glideslope Deviation
+  op: '>'
+  mode: max
+  thresholds:
+  - 1.25
+  - 1.5
+  - 1.75
+  durations:
+  - 3.0
+  - 3.0
+  - 3.0
+  phases:
+  - APPROACH
+  conditions:
+  - param: Radio Height
+    op: <
+    value: 1000.0
+  - param: Radio Height
+    op: '>'
+    value: 100.0
+  - param: Height Above Airfield
+    op: <
+    value: 1000.0
+  detection: '[Radio Height] < 1000 AND [Radio Height] > 100 AND [Height Above Airfield] < 1000'
+  description: Deviation below Glideslope below 1000 ft.
+  mitigation: *id001
+- id: 47-BFY
+  code: 47-BFY
+  name: Early Flap/Slat Retraction After Takeoff
+  category: Descolagem
+  parameter: Radio Height
+  op: <
+  mode: min
+  thresholds:
+  - 400.0
+  - 300.0
+  - 200.0
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases:
+  - TAKEOFF
+  - INITIAL_CLIMB
+  conditions:
+  - param: Flap Rate
+    op: <
+    value: -1.0
+  - param: AIR GROUND
+    op: <
+    value: 0.5
+  detection: '[Flap Rate] < -1 AND [AIR GROUND] < 0.5'
+  description: ''
+  mitigation: *id001
+- id: 21C-BFY
+  code: 21C-BFY
+  name: Excessive Bank Angle Above 1000 ft
+  category: Controlo de voo
+  parameter: Absolute Roll Angle
+  op: '>'
+  mode: max
+  thresholds:
+  - 32.0
+  - 36.0
+  - 40.0
+  durations:
+  - 3.0
+  - 3.0
+  - 3.0
+  phases:
+  - CLIMB
+  - CRUISE
+  - DESCENT
+  conditions: []
+  detection: '[Height Above Airfield] > 1000 OR ([Height Above Airfield] <= 0 AND [AIR GROUND] < 0.5)'
+  description: ''
+  mitigation: *id001
+  unparsed_conditions:
+  - '[Height Above Airfield] > 1000 OR ([Height Above Airfield] <= 0'
+  - '[AIR GROUND] < 0.5)'
+- id: 21A-BFY
+  code: 21A-BFY
+  name: Excessive Bank Angle During Climb Below 100 ft
+  category: Controlo de voo
+  parameter: Absolute Roll Angle
+  op: '>'
+  mode: max
+  thresholds:
+  - 6.0
+  - 8.0
+  - 10.0
+  durations:
+  - 3.0
+  - 3.0
+  - 3.0
+  phases:
+  - INITIAL_CLIMB
+  conditions:
+  - param: Height Above Airfield
+    op: <
+    value: 100.0
+  - param: Height Above Airfield
+    op: '>'
+    value: 5.0
+  detection: '[Height Above Airfield] < 100 AND [Height Above Airfield] > 5'
+  description: Detects excessive bank angle in climb below 100 ft.
+  mitigation: *id001
+- id: 21B-BFY
+  code: 21B-BFY
+  name: Excessive Bank Angle During Climb Between 100 ft and 400 ft
+  category: Controlo de voo
+  parameter: Absolute Roll Angle
+  op: '>'
+  mode: max
+  thresholds:
+  - 15.0
+  - 20.0
+  - 25.0
+  durations:
+  - 3.0
+  - 3.0
+  - 3.0
+  phases:
+  - INITIAL_CLIMB
+  conditions:
+  - param: Height Above Airfield
+    op: '>'
+    value: 100.0
+  - param: Height Above Airfield
+    op: <
+    value: 400.0
+  detection: '[Height Above Airfield] > 100 AND [Height Above Airfield] < 400'
+  description: ''
+  mitigation: *id001
+- id: 21J-BFY
+  code: 21J-BFY
+  name: Excessive Bank Angle During Climb Between 400 ft and 1000 ft
+  category: Controlo de voo
+  parameter: Absolute Roll Angle
+  op: '>'
+  mode: max
+  thresholds:
+  - 15.0
+  - 20.0
+  - 25.0
+  durations:
+  - 3.0
+  - 3.0
+  - 3.0
+  phases:
+  - INITIAL_CLIMB
+  conditions:
+  - param: Height Above Airfield
+    op: '>'
+    value: 400.0
+  - param: Height Above Airfield
+    op: <
+    value: 1000.0
+  detection: '[Height Above Airfield] > 400 AND [Height Above Airfield] < 1000'
+  description: ''
+  mitigation: *id001
+- id: 21E-BFY
+  code: 21E-BFY
+  name: Excessive Bank Angle on Approach Below 100 ft
+  category: Controlo de voo
+  parameter: Absolute Roll Angle
+  op: '>'
+  mode: max
+  thresholds:
+  - 6.0
+  - 8.0
+  - 10.0
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases:
+  - APPROACH
+  conditions:
+  - param: Radio Height
+    op: <
+    value: 100.0
+  - param: Radio Height
+    op: '>'
+    value: 5.0
+  detection: '[Radio Height] < 100 AND [Radio Height] > 5'
+  description: Detect excessive bank angle during approach phase.
+  mitigation: *id001
+- id: 21G-BFY
+  code: 21G-BFY
+  name: Excessive Bank Angle on Approach Between 1000 ft and 400 ft
+  category: Controlo de voo
+  parameter: Absolute Roll Angle
+  op: '>'
+  mode: max
+  thresholds:
+  - 25.0
+  - 30.0
+  - 35.0
+  durations:
+  - 3.0
+  - 3.0
+  - 3.0
+  phases:
+  - APPROACH
+  conditions:
+  - param: Radio Height
+    op: <
+    value: 1000.0
+  - param: Radio Height
+    op: '>'
+    value: 400.0
+  detection: '[Radio Height] < 1000 AND [Radio Height] > 400'
+  description: ''
+  mitigation: *id001
+- id: 21H-BFY
+  code: 21H-BFY
+  name: Excessive Bank Angle on Approach Between 400 ft and 100 ft
+  category: Controlo de voo
+  parameter: Absolute Roll Angle
+  op: '>'
+  mode: max
+  thresholds:
+  - 10.0
+  - 15.0
+  - 20.0
+  durations:
+  - 3.0
+  - 3.0
+  - 3.0
+  phases:
+  - APPROACH
+  conditions:
+  - param: Radio Height
+    op: '>'
+    value: 100.0
+  - param: Radio Height
+    op: <
+    value: 400.0
+  detection: '[Radio Height] > 100 AND [Radio Height] < 400'
+  description: ''
+  mitigation: *id001
+- id: 03C-BFY
+  code: 03C-BFY
+  name: Flap 10 Speed Exceeded
+  category: Velocidade
+  parameter: Computed Airspeed
+  op: '>'
+  mode: max
+  thresholds:
+  - null
+  - 250.0
+  - 254.0
+  durations:
+  - 0.0
+  - 3.0
+  - 3.0
+  phases:
+  - TAKEOFF
+  - INITIAL_CLIMB
+  - DESCENT
+  - APPROACH
+  conditions:
+  - param: Flap Position
+    op: '>'
+    value: 7.0
+  - param: Flap Position
+    op: <
+    value: 12.0
+  detection: '[Flap Position] > 7 AND [Flap Position] < 12'
+  description: ''
+  mitigation: *id001
+- id: 03E-BFY
+  code: 03E-BFY
+  name: Flap 20 Speed Exceeded
+  category: Velocidade
+  parameter: Computed Airspeed
+  op: '>'
+  mode: max
+  thresholds:
+  - null
+  - 220.0
+  - 224.0
+  durations:
+  - 0.0
+  - 3.0
+  - 3.0
+  phases:
+  - APPROACH
+  conditions:
+  - param: Flap Position
+    op: '>'
+    value: 17.0
+  - param: Flap Position
+    op: <
+    value: 23.0
+  detection: '[Flap Position] > 17 AND [Flap Position] < 23'
+  description: ''
+  mitigation: *id001
+- id: 03L-BFY
+  code: 03L-BFY
+  name: Flap 39 Speed Exceeded
+  category: Velocidade
+  parameter: Computed Airspeed
+  op: '>'
+  mode: max
+  thresholds:
+  - 160.0
+  - 165.0
+  - 170.0
+  durations:
+  - 3.0
+  - 3.0
+  - 3.0
+  phases:
+  - TAKEOFF
+  - INITIAL_CLIMB
+  - CLIMB
+  - DESCENT
+  - APPROACH
+  - GO_AROUND
+  conditions:
+  - param: Flap Position
+    op: '>'
+    value: 35.0
+  detection: '[Flap Position] > 35'
+  description: ''
+  mitigation: *id001
+- id: 04-BFY
+  code: 04-BFY
+  name: Flap Altitude Limit Exceeded
+  category: Configuração
+  parameter: Pressure Altitude
+  op: '>'
+  mode: max
+  thresholds:
+  - 19100.0
+  - 19700.0
+  - 20000.0
+  durations:
+  - 5.0
+  - 5.0
+  - 5.0
+  phases:
+  - TAXI_OUT
+  - TAKEOFF
+  - INITIAL_CLIMB
+  - CLIMB
+  - CRUISE
+  - DESCENT
+  - APPROACH
+  - GO_AROUND
+  - LANDING
+  - TAXI_IN
+  conditions:
+  - param: Flap Position
+    op: '>'
+    value: 7.0
+  detection: '[Flap Position] > 7'
+  description: ''
+  mitigation: *id001
+- id: 03W-BFY
+  code: 03W-BFY
+  name: Gear Down Speed Exceeded (VLE)
+  category: Velocidade
+  parameter: Computed Airspeed
+  op: '>'
+  mode: max
+  thresholds:
+  - null
+  - null
+  - 250.0
+  durations:
+  - 0.0
+  - 0.0
+  - 3.0
+  phases:
+  - DESCENT
+  - APPROACH
+  conditions:
+  - param: Left Gear Down
+    op: '>'
+    value: 0.5
+  detection: '[Left Gear Down] > 0.5'
+  description: ''
+  mitigation: *id001
+- id: 03G-BFY
+  code: 03G-BFY
+  name: Gear Extension Above VLO
+  category: Configuração
+  parameter: Computed Airspeed
+  op: '>'
+  mode: max
+  thresholds:
+  - null
+  - null
+  - 225.0
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases:
+  - DESCENT
+  - APPROACH
+  conditions:
+  - param: Gear Rate
+    op: '>'
+    value: 0.0
+  detection: '[Gear Rate] > 0'
+  description: ''
+  mitigation: *id001
+- id: 03I-BFY
+  code: 03I-BFY
+  name: Gear Retraction Above VLO
+  category: Configuração
+  parameter: Computed Airspeed
+  op: '>'
+  mode: max
+  thresholds:
+  - null
+  - null
+  - 225.0
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases:
+  - TAKEOFF
+  - INITIAL_CLIMB
+  conditions:
+  - param: Gear Rate
+    op: <
+    value: 0.0
+  detection: '[Gear Rate] < 0'
+  description: ''
+  mitigation: *id001
+- id: 24-BFY
+  code: 24-BFY
+  name: Go Around
+  category: Operação
+  parameter: Radio Height
+  op: <
+  mode: min
+  thresholds:
+  - 2500.0
+  - 200.0
+  - null
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases:
+  - DESCENT
+  - APPROACH
+  - GO_AROUND
+  conditions:
+  - param: Vertical Speed
+    op: '>'
+    value: 100.0
+  - param: Vertical Speed(-90)
+    op: <
+    value: -400.0
+  - param: AIR GROUND
+    op: <
+    value: 0.5
+  - param: AIR GROUND(-60)
+    op: <
+    value: 0.5
+  - param: N1 Engine 1
+    op: '>'
+    value: 69.0
+  detection: '[Vertical Speed] > 100 AND [Vertical Speed(-90)] < -400 AND [AIR GROUND] < 0.5 AND [AIR GROUND(-60)] < 0.5 AND
+    [N1 Engine 1] > 69'
+  description: ''
+  mitigation: *id001
+- id: 44E-BFY
+  code: 44E-BFY
+  name: GPWS Warning Above 1000 ft
+  category: Avisos
+  parameter: GPWS Warning
+  op: '>'
+  mode: max
+  thresholds:
+  - null
+  - null
+  - 0.5
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases:
+  - INITIAL_CLIMB
+  - CLIMB
+  - CRUISE
+  - DESCENT
+  - APPROACH
+  - GO_AROUND
+  conditions:
+  - param: Height Above Airfield
+    op: '>'
+    value: 1000.0
+  - param: AIR GROUND
+    op: <
+    value: 0.5
+  detection: '[Height Above Airfield] > 1000 AND [AIR GROUND] < 0.5'
+  description: Detects when a GPWS warning is triggered above 1000 ft.
+  mitigation: *id001
+- id: 44G-BFY
+  code: 44G-BFY
+  name: GPWS Warning Below 500 ft
+  category: Avisos
+  parameter: GPWS Warning
+  op: '>'
+  mode: max
+  thresholds:
+  - null
+  - null
+  - 0.5
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases:
+  - INITIAL_CLIMB
+  - CLIMB
+  - CRUISE
+  - DESCENT
+  - APPROACH
+  - GO_AROUND
+  conditions:
+  - param: Height Above Airfield
+    op: <
+    value: 500.0
+  - param: Height Above Airfield
+    op: '>'
+    value: 5.0
+  - param: Radio Height
+    op: <
+    value: 500.0
+  detection: '[Height Above Airfield] < 500 AND [Height Above Airfield] > 5 AND [Radio Height] < 500'
+  description: Detects when a GPWS warning is triggered below 500 ft.
+  mitigation: *id001
+- id: 44H-BFY
+  code: 44H-BFY
+  name: GPWS Warning Between 500 ft and 1000 ft
+  category: Avisos
+  parameter: GPWS Warning
+  op: '>'
+  mode: max
+  thresholds:
+  - null
+  - null
+  - 0.5
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases:
+  - INITIAL_CLIMB
+  - CLIMB
+  - APPROACH
+  conditions:
+  - param: Radio Height
+    op: '>'
+    value: 500.0
+  - param: Radio Height
+    op: <
+    value: 1000.0
+  detection: '[Radio Height] > 500 AND [Radio Height] < 1000'
+  description: Detects when a GPWS warning is triggered between 500 ft and 1000 ft.
+  mitigation: *id001
+- id: 51B-BFY
+  code: 51B-BFY
+  name: Heading Deviation During Takeoff
+  category: Descolagem
+  parameter: Absolute Turn Rate
+  op: '>'
+  mode: max
+  thresholds:
+  - 2.0
+  - 3.0
+  - 4.0
+  durations:
+  - 1.0
+  - 1.0
+  - 1.0
+  phases:
+  - TAKEOFF
+  conditions:
+  - param: AIR GROUND
+    op: '>'
+    value: 0.5
+  - param: Computed Airspeed
+    op: '>'
+    value: 100.0
+  detection: '[AIR GROUND] > 0.5 AND [Computed Airspeed] > 100'
+  description: Monitors for significant turn rate during takeoff roll above 100 kts.
+  mitigation: *id001
+- id: 23H-BFY
+  code: 23H-BFY
+  name: High Lateral Acceleration During Taxi
+  category: Solo
+  parameter: Absolute Lateral Acceleration
+  op: '>'
+  mode: max
+  thresholds:
+  - null
+  - null
+  - 0.2
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases:
+  - TAXI_OUT
+  - TAXI_IN
+  conditions:
+  - param: Radio Height
+    op: <
+    value: 20.0
+  detection: '[Radio Height] < 20'
+  description: ''
+  mitigation: *id001
+- id: 20A-BFY
+  code: 20A-BFY
+  name: High Pitch Angle at Takeoff
+  category: Controlo de voo
+  parameter: Pitch Angle
+  op: '>'
+  mode: max
+  thresholds:
+  - 11.0
+  - 12.0
+  - 13.0
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases:
+  - TAKEOFF
+  conditions:
+  - param: AIR GROUND
+    op: '>'
+    value: 0.5
+  detection: '[AIR GROUND] > 0.5'
+  description: ''
+  mitigation: *id001
+- id: 20B-BFY
+  code: 20B-BFY
+  name: High Pitch Angle at Touchdown
+  category: Controlo de voo
+  parameter: Pitch Angle
+  op: '>'
+  mode: max
+  thresholds:
+  - 6.0
+  - 7.0
+  - 8.0
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases:
+  - APPROACH
+  - LANDING
+  conditions:
+  - param: AIR GROUND
+    op: '>'
+    value: 0.5
+  - param: Radio Height
+    op: <
+    value: 10.0
+  detection: '[AIR GROUND] > 0.5 AND [Radio Height] < 10'
+  description: 'Detect high pitch angle at or just before the touchdown point.
+
+    Applicability: G-IV/V'
+  mitigation: *id001
+- id: 20N-BFY
+  code: 20N-BFY
+  name: High Pitch Angle on Approach
+  category: Controlo de voo
+  parameter: Pitch Angle
+  op: '>'
+  mode: max
+  thresholds:
+  - 6.0
+  - 8.0
+  - 10.0
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases:
+  - APPROACH
+  conditions:
+  - param: Radio Height
+    op: <
+    value: 1000.0
+  - param: Radio Height
+    op: '>'
+    value: 100.0
+  detection: '[Radio Height] < 1000 AND [Radio Height] > 100'
+  description: ''
+  mitigation: *id001
+- id: 20L-BFY
+  code: 20L-BFY
+  name: High Pitch Angle on Initial Climb Below 400 ft
+  category: Controlo de voo
+  parameter: Pitch Angle
+  op: '>'
+  mode: max
+  thresholds:
+  - 19.0
+  - 25.0
+  - 30.0
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases:
+  - INITIAL_CLIMB
+  conditions:
+  - param: Radio Height
+    op: <
+    value: 400.0
+  - param: Radio Height
+    op: '>'
+    value: 35.0
+  detection: '[Radio Height] < 400 AND [Radio Height] > 35'
+  description: ''
+  mitigation: *id001
+- id: 09F-BFY
+  code: 09F-BFY
+  name: High Pitch Rate at Landing
+  category: Controlo de voo
+  parameter: Pitch Rate
+  op: '>'
+  mode: max
+  thresholds:
+  - 2.0
+  - 2.5
+  - 3.0
+  durations:
+  - 1.0
+  - 1.0
+  - 1.0
+  phases:
+  - APPROACH
+  - LANDING
+  conditions:
+  - param: Radio Height
+    op: <
+    value: 10.0
+  - param: Radio Height
+    op: '>'
+    value: 0.0
+  - param: AIR GROUND
+    op: <
+    value: 0.5
+  detection: '[Radio Height] < 10 AND [Radio Height] > 0 AND [AIR GROUND] < 0.5'
+  description: Utilizes AIR GROUND
+  mitigation: *id001
+- id: 09A-BFY
+  code: 09A-BFY
+  name: High Pitch Rate at Takeoff
+  category: Controlo de voo
+  parameter: Pitch Rate
+  op: '>'
+  mode: max
+  thresholds:
+  - 4.5
+  - 5.0
+  - 5.5
+  durations:
+  - 1.0
+  - 1.0
+  - 1.0
+  phases:
+  - TAKEOFF
+  - INITIAL_CLIMB
+  conditions:
+  - param: AIR GROUND
+    op: '>'
+    value: 0.5
+  detection: '[AIR GROUND] > 0.5'
+  description: Utilizes AIR GROUND when individual Gear WOW parameters are not available.
+  mitigation: *id001
+- id: 09G-BFY
+  code: 09G-BFY
+  name: High Pitch Rate During Initial Climb
+  category: Controlo de voo
+  parameter: Pitch Rate
+  op: '>'
+  mode: max
+  thresholds:
+  - 3.5
+  - 4.0
+  - 4.5
+  durations:
+  - 1.0
+  - 1.0
+  - 1.0
+  phases:
+  - INITIAL_CLIMB
+  conditions:
+  - param: Radio Height
+    op: '>'
+    value: 50.0
+  - param: Radio Height
+    op: <
+    value: 1500.0
+  detection: '[Radio Height] > 50 AND [Radio Height] < 1500'
+  description: Monitor from 50 ft to 1500 ft AGL.
+  mitigation: *id001
+- id: 92Z-BFY
+  code: 92Z-BFY
+  name: High Power During Takeoff
+  category: Descolagem
+  parameter: ([N1 Engine 1] + [N1 Engine 2]) / 2
+  op: '>'
+  mode: max
+  thresholds:
+  - null
+  - null
+  - 99.6
+  durations:
+  - 0.0
+  - 0.0
+  - 300.0
+  phases:
+  - TAKEOFF
+  - INITIAL_CLIMB
+  conditions: []
+  detection: ''
+  description: ''
+  mitigation: *id001
+- id: 22J-BFY
+  code: 22J-BFY
+  name: High Rate of Descent Below 20 ft
+  category: Operação
+  parameter: Approach Slope
+  op: '>'
+  mode: max
+  thresholds:
+  - 2.25
+  - 2.65
+  - 3.0
+  durations:
+  - 1.0
+  - 1.0
+  - 1.0
+  phases:
+  - APPROACH
+  conditions:
+  - param: Radio Height
+    op: <
+    value: 20.0
+  - param: Radio Height
+    op: '>'
+    value: 2.0
+  - param: Radio Height(-2)
+    op: <
+    value: 80.0
+  - param: AIR GROUND
+    op: <
+    value: 0.5
+  detection: '[Radio Height] < 20 AND [Radio Height] > 2 AND [Radio Height(-2)] < 80 AND [AIR GROUND] < 0.5'
+  description: ''
+  mitigation: *id001
+- id: 22K-BFY
+  code: 22K-BFY
+  name: High Rate of Descent on Approach Above 2000 ft
+  category: Aproximação
+  parameter: Vertical Speed
+  op: <
+  mode: min
+  thresholds:
+  - -3000.0
+  - -3300.0
+  - -3600.0
+  durations:
+  - 3.0
+  - 3.0
+  - 3.0
+  phases:
+  - APPROACH
+  conditions:
+  - param: Height Above Airfield
+    op: '>'
+    value: 2000.0
+  - param: Height Above Airfield
+    op: <
+    value: 3000.0
+  detection: '[Height Above Airfield] > 2000 AND [Height Above Airfield] < 3000'
+  description: ''
+  mitigation: *id001
+- id: 22B-BFY
+  code: 22B-BFY
+  name: High Rate of Descent on Approach Between 1000 ft and 500 ft
+  category: Aproximação
+  parameter: Vertical Speed
+  op: <
+  mode: min
+  thresholds:
+  - -1300.0
+  - -1400.0
+  - -1500.0
+  durations:
+  - 2.0
+  - 2.0
+  - 3.0
+  phases:
+  - APPROACH
+  conditions:
+  - param: Radio Height
+    op: '>'
+    value: 500.0
+  - param: Radio Height
+    op: <
+    value: 1000.0
+  detection: '[Radio Height] > 500 AND [Radio Height] < 1000'
+  description: ''
+  mitigation: *id001
+- id: 22G-BFY
+  code: 22G-BFY
+  name: High Rate of Descent on Approach Between 2000 ft and 1000 ft
+  category: Aproximação
+  parameter: Vertical Speed
+  op: <
+  mode: min
+  thresholds:
+  - -1800.0
+  - -1900.0
+  - -2000.0
+  durations:
+  - 3.0
+  - 3.0
+  - 3.0
+  phases:
+  - APPROACH
+  conditions:
+  - param: Radio Height
+    op: '>'
+    value: 1000.0
+  - param: Radio Height
+    op: <
+    value: 2000.0
+  detection: '[Radio Height] > 1000 AND [Radio Height] < 2000'
+  description: ''
+  mitigation: *id001
+- id: 22A-BFY
+  code: 22A-BFY
+  name: High Rate of Descent on Approach Between 500 ft and 50 ft
+  category: Aproximação
+  parameter: Vertical Speed
+  op: <
+  mode: min
+  thresholds:
+  - -1000.0
+  - -1100.0
+  - -1200.0
+  durations:
+  - 4.0
+  - 4.0
+  - 4.0
+  phases:
+  - APPROACH
+  conditions:
+  - param: Radio Height
+    op: '>'
+    value: 50.0
+  - param: Radio Height
+    op: <
+    value: 500.0
+  detection: '[Radio Height] > 50 AND [Radio Height] < 500'
+  description: ''
+  mitigation: *id001
+- id: 06D-BFY
+  code: 06D-BFY
+  name: High Speed on Arrival Below 10,000 ft
+  category: Velocidade
+  parameter: Computed Airspeed
+  op: '>'
+  mode: max
+  thresholds:
+  - 255.0
+  - 260.0
+  - 265.0
+  durations:
+  - 10.0
+  - 10.0
+  - 10.0
+  phases:
+  - DESCENT
+  - APPROACH
+  conditions:
+  - param: Pressure Altitude
+    op: <
+    value: 10000.0
+  - param: Height Above Airfield
+    op: '>'
+    value: 3000.0
+  detection: '[Pressure Altitude] < 10000 AND [Height Above Airfield] > 3000'
+  description: ''
+  mitigation: *id001
+- id: 23F-BFY
+  code: 23F-BFY
+  name: High Vertical Acceleration During Rotation
+  category: Descolagem
+  parameter: Vertical Acceleration
+  op: '>'
+  mode: max
+  thresholds:
+  - 1.3
+  - 1.35
+  - 1.4
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases:
+  - TAKEOFF
+  - INITIAL_CLIMB
+  conditions:
+  - param: Radio Height
+    op: <
+    value: 20.0
+  detection: '[Radio Height] < 20'
+  description: ''
+  mitigation: *id001
+- id: 23B-BFY
+  code: 23B-BFY
+  name: High Vertical Acceleration in Flight
+  category: Cargas
+  parameter: Vertical Acceleration
+  op: '>'
+  mode: max
+  thresholds:
+  - 1.8
+  - 1.9
+  - 2.0
+  durations:
+  - 1.0
+  - 1.0
+  - 1.0
+  phases:
+  - INITIAL_CLIMB
+  - CLIMB
+  - CRUISE
+  - DESCENT
+  - APPROACH
+  - GO_AROUND
+  conditions: []
+  detection: ''
+  description: ''
+  mitigation: *id001
+- id: 23D-BFY
+  code: 23D-BFY
+  name: High Vertical Acceleration in Flight - w/Flaps
+  category: Configuração
+  parameter: Vertical Acceleration
+  op: '>'
+  mode: max
+  thresholds:
+  - 1.4
+  - 1.6
+  - 1.8
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases:
+  - INITIAL_CLIMB
+  - CLIMB
+  - CRUISE
+  - DESCENT
+  - APPROACH
+  - GO_AROUND
+  conditions:
+  - param: Flap Position
+    op: '>'
+    value: 3.0
+  - param: Height Above Airfield
+    op: '>'
+    value: 20.0
+  - param: Vertical Acceleration
+    op: <
+    value: 3.0
+  detection: '[Flap Position] > 3 AND [Height Above Airfield] > 20 AND [Vertical Acceleration] < 3'
+  description: ''
+  mitigation: *id001
+- id: 23C-BFY
+  code: 23C-BFY
+  name: High Vertical Acceleration on Landing
+  category: Aterragem
+  parameter: Vertical Acceleration
+  op: '>'
+  mode: max
+  thresholds:
+  - 1.9
+  - 2.0
+  - 2.1
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases:
+  - APPROACH
+  - LANDING
+  conditions:
+  - param: Radio Height
+    op: <
+    value: 20.0
+  detection: '[Radio Height] < 20'
+  description: ''
+  mitigation: *id001
+- id: 48B-BFY
+  code: 48B-BFY
+  name: Incorrect Landing Flap
+  category: Aterragem
+  parameter: Flap Position
+  op: <
+  mode: min
+  thresholds:
+  - null
+  - 35.0
+  - 17.0
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases:
+  - APPROACH
+  - LANDING
+  conditions:
+  - param: Radio Height
+    op: <
+    value: 20.0
+  - param: Radio Height
+    op: '>'
+    value: 0.0
+  - param: Computed Airspeed
+    op: '>'
+    value: 80.0
+  detection: '[Radio Height] < 20 AND [Radio Height] > 0 AND [Computed Airspeed] > 80'
+  description: ''
+  mitigation: *id001
+- id: 48A-BFY
+  code: 48A-BFY
+  name: Landing Gear Not Locked Down Below 1000 ft
+  category: Aterragem
+  parameter: Left Gear Down
+  op: <
+  mode: min
+  thresholds:
+  - null
+  - null
+  - 0.5
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases:
+  - APPROACH
+  conditions:
+  - param: Radio Height
+    op: <
+    value: 1000.0
+  - param: Radio Height
+    op: '>'
+    value: 5.0
+  - param: Height Above Airfield
+    op: <
+    value: 1000.0
+  detection: '[Radio Height] < 1000 AND [Radio Height] > 5 AND [Height Above Airfield] < 1000'
+  description: ''
+  mitigation: *id001
+- id: 47C-BFY
+  code: 47C-BFY
+  name: Landing Gear Out of Sequence
+  category: Aterragem
+  parameter: Left Gear Down
+  op: <
+  mode: min
+  thresholds:
+  - null
+  - null
+  - 0.5
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases:
+  - APPROACH
+  - LANDING
+  conditions:
+  - param: Flap Position
+    op: '>'
+    value: 25.0
+  detection: '[Flap Position] > 25'
+  description: ''
+  mitigation: *id001
+- id: 47A-BFY
+  code: 47A-BFY
+  name: Late Landing Flap Setting
+  category: Aterragem
+  parameter: Radio Height
+  op: <
+  mode: min
+  thresholds:
+  - 1000.0
+  - 750.0
+  - 500.0
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases:
+  - APPROACH
+  conditions:
+  - param: Flap Rate
+    op: '>'
+    value: 0.5
+  - param: Height Above Airfield
+    op: '>'
+    value: 5.0
+  - param: Height Above Airfield
+    op: <
+    value: 1000.0
+  - param: Radio Height
+    op: <
+    value: 1000.0
+  detection: '[Flap Rate] > 0.5 AND [Height Above Airfield] > 5 AND [Height Above Airfield] < 1000 AND [Radio Height] < 1000'
+  description: Detects when landing flap is selected after a pre-determined altitude on approach.
+  mitigation: *id001
+- id: 47B-BFY
+  code: 47B-BFY
+  name: Late Landing Gear Retraction
+  category: Aterragem
+  parameter: Radio Height
+  op: '>'
+  mode: max
+  thresholds:
+  - 500.0
+  - null
+  - null
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases:
+  - TAKEOFF
+  - INITIAL_CLIMB
+  conditions:
+  - param: Left Gear Down
+    op: '>'
+    value: 0.5
+  - param: Radio Height
+    op: <
+    value: 5000.0
+  detection: '[Left Gear Down] > 0.5 AND [Radio Height] < 5000'
+  description: Utilizes "Gear Lever Position"
+  mitigation: *id001
+- id: 22L-BFY
+  code: 22L-BFY
+  name: Level Flight Below 1400 ft
+  category: Operação
+  parameter: Absolute Vertical Speed
+  op: <
+  mode: min
+  thresholds:
+  - 200.0
+  - null
+  - null
+  durations:
+  - 5.0
+  - 0.0
+  - 0.0
+  phases:
+  - DESCENT
+  - APPROACH
+  conditions:
+  - param: Radio Height
+    op: <
+    value: 1400.0
+  - param: Radio Height
+    op: '>'
+    value: 100.0
+  - param: Pressure Altitude
+    op: <
+    value: 10000.0
+  detection: '[Radio Height] < 1400 AND [Radio Height] > 100 AND [Pressure Altitude] < 10000'
+  description: ''
+  mitigation: *id001
+- id: 56C-BFY
+  code: 56C-BFY
+  name: Localizer Deviation Below 1000 ft
+  category: Aproximação
+  parameter: Absolute Localizer Deviation
+  op: '>'
+  mode: max
+  thresholds:
+  - 1.25
+  - 1.5
+  - 1.75
+  durations:
+  - 3.0
+  - 3.0
+  - 3.0
+  phases:
+  - APPROACH
+  conditions:
+  - param: Radio Height
+    op: <
+    value: 1000.0
+  - param: Height Above Airfield
+    op: <
+    value: 1000.0
+  - param: Radio Height
+    op: '>'
+    value: 100.0
+  detection: '[Radio Height] < 1000 AND [Height Above Airfield] < 1000 AND [Radio Height] > 100'
+  description: ''
+  mitigation: *id001
+- id: 19A-BFY
+  code: 19A-BFY
+  name: Long Flare
+  category: Aterragem
+  parameter: AIR GROUND
+  op: <
+  mode: min
+  thresholds:
+  - 0.5
+  - 0.5
+  - 0.5
+  durations:
+  - 6.0
+  - 7.0
+  - 10.0
+  phases:
+  - APPROACH
+  - LANDING
+  conditions:
+  - param: Radio Height
+    op: <
+    value: 20.0
+  detection: '[Radio Height] < 20'
+  description: Detects if flare lasts longer than x seconds.
+  mitigation: *id001
+- id: 20C-BFY
+  code: 20C-BFY
+  name: Low Pitch Angle at Touchdown
+  category: Controlo de voo
+  parameter: Pitch Angle
+  op: <
+  mode: min
+  thresholds:
+  - 0.7
+  - 0.6
+  - 0.5
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases:
+  - APPROACH
+  - LANDING
+  conditions:
+  - param: Radio Height
+    op: <
+    value: 4.0
+  - param: AIR GROUND
+    op: <
+    value: 0.5
+  detection: '[Radio Height] < 4 AND [AIR GROUND] < 0.5'
+  description: ''
+  mitigation: *id001
+- id: 20P-BFY
+  code: 20P-BFY
+  name: Low Pitch Angle on Approach
+  category: Controlo de voo
+  parameter: Pitch Angle
+  op: <
+  mode: min
+  thresholds:
+  - 0.0
+  - -2.0
+  - -3.0
+  durations:
+  - 5.0
+  - 5.0
+  - 5.0
+  phases:
+  - INITIAL_CLIMB
+  conditions:
+  - param: Radio Height
+    op: <
+    value: 1000.0
+  - param: Radio Height
+    op: '>'
+    value: 100.0
+  detection: '[Radio Height] < 1000 AND [Radio Height] > 100'
+  description: ''
+  mitigation: *id001
+- id: 20K-BFY
+  code: 20K-BFY
+  name: Low Pitch Angle on Initial Climb Below 400 ft
+  category: Controlo de voo
+  parameter: Pitch Angle
+  op: <
+  mode: min
+  thresholds:
+  - 13.0
+  - 12.0
+  - 10.0
+  durations:
+  - 3.0
+  - 3.0
+  - 3.0
+  phases:
+  - INITIAL_CLIMB
+  conditions:
+  - param: Radio Height
+    op: <
+    value: 400.0
+  - param: Radio Height
+    op: '>'
+    value: 35.0
+  detection: '[Radio Height] < 400 AND [Radio Height] > 35'
+  description: ''
+  mitigation: *id001
+- id: 09E-BFY
+  code: 09E-BFY
+  name: Low Pitch Rate at Takeoff
+  category: Controlo de voo
+  parameter: Pitch Rate
+  op: <
+  mode: min
+  thresholds:
+  - 0.9
+  - 0.6
+  - 0.5
+  durations:
+  - 1.0
+  - 1.0
+  - 1.0
+  phases:
+  - TAKEOFF
+  - INITIAL_CLIMB
+  conditions:
+  - param: Radio Height
+    op: <
+    value: 25.0
+  - param: Pitch Angle
+    op: '>'
+    value: 1.5
+  detection: '[Radio Height] < 25 AND [Pitch Angle] > 1.5'
+  description: Utilizes AIR GROUND when individual Gear WOW parameters are not available.
+  mitigation: *id001
+- id: 75A-BFY
+  code: 75A-BFY
+  name: Low Power on Short Final Below 500 ft
+  category: Operação
+  parameter: ([N1 Engine 1] + [N1 Engine 2]) / 2
+  op: <
+  mode: min
+  thresholds:
+  - 35.0
+  - 33.0
+  - 30.0
+  durations:
+  - 5.0
+  - 5.0
+  - 5.0
+  phases:
+  - APPROACH
+  conditions:
+  - param: Radio Height
+    op: <
+    value: 500.0
+  - param: Radio Height
+    op: '>'
+    value: 20.0
+  detection: '[Radio Height] < 500 AND [Radio Height] > 20'
+  description: Applies to jet aircraft with N1 recorded (uses average of Engine 1 and 2).
+  mitigation: *id001
+- id: 22C-BFY
+  code: 22C-BFY
+  name: Low Rate of Climb After Takeoff or Go Around
+  category: Descolagem
+  parameter: Vertical Speed
+  op: <
+  mode: min
+  thresholds:
+  - 1000.0
+  - 750.0
+  - 500.0
+  durations:
+  - 5.0
+  - 5.0
+  - 5.0
+  phases:
+  - INITIAL_CLIMB
+  - GO_AROUND
+  conditions:
+  - param: Height Above Airfield
+    op: <
+    value: 2000.0
+  - param: Height Above Airfield
+    op: '>'
+    value: 30.0
+  - param: AIR GROUND
+    op: <
+    value: 0.5
+  detection: '[Height Above Airfield] < 2000 AND [Height Above Airfield] > 30 AND [AIR GROUND] < 0.5'
+  description: Detects a low rate of climb between 30 ft to 2000 ft.
+  mitigation: *id001
+- id: 23G-BFY
+  code: 23G-BFY
+  name: Low Vertical Acceleration in Flight
+  category: Cargas
+  parameter: Vertical Acceleration
+  op: <
+  mode: min
+  thresholds:
+  - 0.2
+  - 0.1
+  - 0.0
+  durations:
+  - 1.0
+  - 1.0
+  - 1.0
+  phases:
+  - INITIAL_CLIMB
+  - CLIMB
+  - CRUISE
+  - DESCENT
+  - APPROACH
+  - GO_AROUND
+  - LANDING
+  conditions: []
+  detection: ''
+  description: ''
+  mitigation: *id001
+- id: 23E-BFY
+  code: 23E-BFY
+  name: Low Vertical Acceleration in Flight - w/Flaps
+  category: Configuração
+  parameter: Vertical Acceleration
+  op: <
+  mode: min
+  thresholds:
+  - 0.4
+  - 0.2
+  - 0.0
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases:
+  - INITIAL_CLIMB
+  - CLIMB
+  - CRUISE
+  - DESCENT
+  - APPROACH
+  - GO_AROUND
+  conditions:
+  - param: Flap Position
+    op: '>'
+    value: 3.0
+  detection: '[Flap Position] > 3'
+  description: Detects low Vertical Acceleration during flight with Flaps extended.
+  mitigation: *id001
+- id: 05-BFY
+  code: 05-BFY
+  name: Maximum Operating Altitude Exceeded
+  category: Altitude
+  parameter: Pressure Altitude
+  op: '>'
+  mode: max
+  thresholds:
+  - null
+  - null
+  - 51000.0
+  durations:
+  - 0.0
+  - 0.0
+  - 3.0
+  phases:
+  - TAXI_OUT
+  - TAKEOFF
+  - INITIAL_CLIMB
+  - CLIMB
+  - CRUISE
+  - DESCENT
+  - APPROACH
+  - GO_AROUND
+  - LANDING
+  - TAXI_IN
+  conditions: []
+  detection: ''
+  description: ''
+  mitigation: *id001
+- id: 58D-BFY
+  code: 58D-BFY
+  name: Questionable Braking at Landing
+  category: Aterragem
+  parameter: Longitudinal Acceleration
+  op: <
+  mode: min
+  thresholds:
+  - -0.35
+  - -0.4
+  - -0.45
+  durations:
+  - 3.0
+  - 3.0
+  - 3.0
+  phases:
+  - LANDING
+  conditions:
+  - param: AIR GROUND
+    op: '>'
+    value: 0.5
+  detection: '[AIR GROUND] > 0.5'
+  description: Utilizes AIR GROUND
+  mitigation: *id001
+- id: 26-BFY
+  code: 26-BFY
+  name: Rejected Takeoff
+  category: Descolagem
+  parameter: Computed Airspeed
+  op: '>'
+  mode: max
+  thresholds:
+  - null
+  - null
+  - 80.0
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases:
+  - TAKEOFF
+  conditions:
+  - param: Longitudinal Acceleration
+    op: <
+    value: -0.05
+  - param: N1 Engine 1(-3)
+    op: '>'
+    value: 80.0
+  detection: '[Longitudinal Acceleration] < -0.05 AND [N1 Engine 1(-3)] > 80'
+  description: ''
+  mitigation: *id001
+- id: 21K-BFY
+  code: 21K-BFY
+  name: Significant Roll During Flare Below 10 ft
+  category: Controlo de voo
+  parameter: Absolute Roll Angle
+  op: '>'
+  mode: max
+  thresholds:
+  - 5.0
+  - 7.0
+  - 9.0
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases:
+  - APPROACH
+  - LANDING
+  conditions:
+  - param: Radio Height
+    op: <
+    value: 10.0
+  - param: Radio Height
+    op: '>'
+    value: 0.0
+  detection: '[Radio Height] < 10 AND [Radio Height] > 0'
+  description: ''
+  mitigation: *id001
+- id: 43C-BFY
+  code: 43C-BFY
+  name: Speed Brake With Flap
+  category: Velocidade
+  parameter: Speed Brake Command
+  op: '>'
+  mode: max
+  thresholds:
+  - null
+  - null
+  - 0.5
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases:
+  - DESCENT
+  - APPROACH
+  conditions:
+  - param: Flap Position
+    op: '>'
+    value: 35.0
+  detection: '[Flap Position] > 35'
+  description: Detects the application of Speed Brake with Flaps extended.
+  mitigation: *id001
+- id: 01A-BFY
+  code: 01A-BFY
+  name: Speed Exceedance VMO
+  category: Velocidade
+  parameter: Computed Airspeed
+  op: '>'
+  mode: max
+  thresholds:
+  - null
+  - 345.0
+  - 350.0
+  durations:
+  - 0.0
+  - 5.0
+  - 10.0
+  phases:
+  - CRUISE
+  - DESCENT
+  - APPROACH
+  conditions:
+  - param: Pressure Altitude
+    op: '>'
+    value: 3000.0
+  detection: '[Pressure Altitude] > 3000'
+  description: 'VMO Overspeed based on CAS.
+
+    Applicability: G-V'
+  mitigation: *id001
+- id: 43E-BFY
+  code: 43E-BFY
+  name: Spoilers Not Deployed On Landing
+  category: Aterragem
+  parameter: Spoiler LIB Position
+  op: <
+  mode: min
+  thresholds:
+  - null
+  - null
+  - 10.0
+  durations:
+  - 0.0
+  - 0.0
+  - 3.0
+  phases:
+  - LANDING
+  conditions:
+  - param: AIR GROUND
+    op: '>'
+    value: 0.5
+  - param: Computed Airspeed
+    op: '>'
+    value: 60.0
+  detection: '[AIR GROUND] > 0.5 AND [Computed Airspeed] > 60'
+  description: ''
+  mitigation: *id001
+- id: 80-BFY
+  code: 80-BFY
+  name: Taxi Speed Exceedance In Turn
+  category: Solo
+  parameter: Groundspeed
+  op: '>'
+  mode: max
+  thresholds:
+  - 15.0
+  - 18.0
+  - 21.0
+  durations:
+  - 3.0
+  - 3.0
+  - 3.0
+  phases:
+  - TAXI_OUT
+  - TAXI_IN
+  conditions:
+  - param: AIR GROUND
+    op: '>'
+    value: 0.5
+  - param: Absolute Turn Rate
+    op: '>'
+    value: 5.0
+  - param: Absolute Turn Rate
+    op: <
+    value: 20.0
+  - param: Groundspeed
+    op: <
+    value: 60.0
+  - param: Computed Airspeed(-30)
+    op: <
+    value: 100.0
+  detection: '[AIR GROUND] > 0.5 AND [Absolute Turn Rate] > 5 AND [Absolute Turn Rate] < 20 AND [Groundspeed] < 60 AND [Computed
+    Airspeed(-30)] < 100'
+  description: Detects a speed exceedance during a turn whilst taxiing.
+  mitigation: *id001
+- id: 80A-BFY
+  code: 80A-BFY
+  name: Taxi Speed Exceedance Straight
+  category: Solo
+  parameter: Groundspeed
+  op: '>'
+  mode: max
+  thresholds:
+  - 32.0
+  - 35.0
+  - 40.0
+  durations:
+  - 3.0
+  - 3.0
+  - 5.0
+  phases:
+  - TAXI_OUT
+  - TAXI_IN
+  conditions:
+  - param: AIR GROUND
+    op: '>'
+    value: 0.5
+  - param: Groundspeed
+    op: <
+    value: 60.0
+  - param: Absolute Turn Rate
+    op: <
+    value: 5.0
+  - param: TR Deployed Engine 1
+    op: <
+    value: 0.5
+  detection: '[AIR GROUND] > 0.5 AND [Groundspeed] < 60 AND [Absolute Turn Rate] < 5 AND [TR Deployed Engine 1] < 0.5 AND
+    ([Fuel Flow PPH Engine 1] > 50 OR [Fuel Flow PPH Engine 2] > 50)'
+  description: ''
+  mitigation: *id001
+  unparsed_conditions:
+  - ([Fuel Flow PPH Engine 1] > 50 OR [Fuel Flow PPH Engine 2] > 50)
+- id: 49-BFY
+  code: 49-BFY
+  name: TCAS RA Warning
+  category: Avisos
+  parameter: TCAS Warning
+  op: '>'
+  mode: max
+  thresholds:
+  - null
+  - null
+  - 0.5
+  durations:
+  - 0.0
+  - 0.0
+  - 2.0
+  phases:
+  - TAXI_OUT
+  - TAKEOFF
+  - INITIAL_CLIMB
+  - CLIMB
+  - CRUISE
+  - DESCENT
+  - APPROACH
+  - GO_AROUND
+  - LANDING
+  - TAXI_IN
+  conditions:
+  - param: AIR GROUND
+    op: <
+    value: 0.5
+  detection: '[AIR GROUND] < 0.5'
+  description: ''
+  mitigation: *id001
+- id: 91E-BFY
+  code: 91E-BFY
+  name: Thrust Asymmetry in Reverse
+  category: Motores
+  parameter: Engine Asymmetry
+  op: '>'
+  mode: max
+  thresholds:
+  - 10.0
+  - 10.0
+  - 10.0
+  durations:
+  - 5.0
+  - 10.0
+  - 15.0
+  phases:
+  - LANDING
+  conditions: []
+  detection: '[TR Deployed Engine 1] > 0.5 OR [TR Deployed Engine 2] > 0.5'
+  description: ''
+  mitigation: *id001
+  unparsed_conditions:
+  - '[TR Deployed Engine 1] > 0.5 OR [TR Deployed Engine 2] > 0.5'
+- id: 91F-BFY
+  code: 91F-BFY
+  name: Thrust Asymmetry on Approach
+  category: Aproximação
+  parameter: Engine Asymmetry
+  op: '>'
+  mode: max
+  thresholds:
+  - 10.0
+  - 10.0
+  - 10.0
+  durations:
+  - 10.0
+  - 30.0
+  - 60.0
+  phases:
+  - APPROACH
+  conditions:
+  - param: AIR GROUND
+    op: <
+    value: 0.5
+  detection: '[AIR GROUND] < 0.5'
+  description: ''
+  mitigation: *id001
+- id: 80B-BFY
+  code: 80B-BFY
+  name: Thrust High on Ground During Taxi
+  category: Solo
+  parameter: N1 Engine 1
+  op: '>'
+  mode: max
+  thresholds:
+  - 42.0
+  - 45.0
+  - 50.0
+  durations:
+  - 0.0
+  - 0.0
+  - 0.0
+  phases:
+  - TAXI_OUT
+  - TAXI_IN
+  conditions:
+  - param: AIR GROUND
+    op: '>'
+    value: 0.5
+  - param: Groundspeed
+    op: '>'
+    value: 2.0
+  - param: Computed Airspeed (30)
+    op: <
+    value: 100.0
+  detection: '[AIR GROUND] > 0.5 AND [Groundspeed] > 2 AND [Computed Airspeed (30)] < 100'
+  description: Detects high thrust on ground during taxi.
+  mitigation: *id001
+- id: 10B-BFY
+  code: 10B-BFY
+  name: Tire Limit Speed High
+  category: Velocidade
+  parameter: Groundspeed
+  op: '>'
+  mode: max
+  thresholds:
+  - 185.0
+  - 190.0
+  - 195.0
+  durations:
+  - 3.0
+  - 3.0
+  - 3.0
+  phases:
+  - TAKEOFF
+  - LANDING
+  conditions:
+  - param: AIR GROUND
+    op: '>'
+    value: 0.5
+  detection: '[AIR GROUND] > 0.5'
+  description: ''
+  mitigation: *id001
+- id: 44D-BFY
+  code: 44D-BFY
+  name: Windshear Warning Below 1500 ft
+  category: Avisos
+  parameter: Windshear Warning
+  op: '>'
+  mode: max
+  thresholds:
+  - null
+  - null
+  - 0.5
+  durations:
+  - 0.0
+  - 0.0
+  - 0.5
+  phases:
+  - TAXI_OUT
+  - TAKEOFF
+  - INITIAL_CLIMB
+  - CLIMB
+  - CRUISE
+  - DESCENT
+  - APPROACH
+  - GO_AROUND
+  - LANDING
+  - TAXI_IN
+  conditions:
+  - param: Radio Height
+    op: <
+    value: 1500.0
+  - param: Radio Height
+    op: '>'
+    value: 5.0
+  - param: Left Gear Wow
+    op: <
+    value: 0.5
+  detection: '[Radio Height] < 1500 AND [Radio Height] > 5 AND [Left Gear Wow] < 0.5'
+  description: ''
+  mitigation: *id001
+phase_detection:
+  mapping:
+    altitude: Pressure Altitude
+    radio_altitude: Radio Height
+    groundspeed: Groundspeed
+    latitude: Latitude
+    longitude: Longitude

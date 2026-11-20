@@ -1,0 +1,42 @@
+# Blueprint Render: um serviço web (Frankfurt) com disco persistente para todos os dados.
+# No Render: New > Blueprint > escolher o repositório. Preencher os valores marcados sync: false.
+services:
+  - type: web
+    name: vektor-fdm
+    runtime: docker
+    region: frankfurt
+    plan: 1c-2g               # 1 CPU, 2 GB RAM (antigo "standard"), 25 USD/mês
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /_stcore/health
+    autoDeploy: true
+    disk:
+      name: fdm-data
+      mountPath: /data
+      sizeGB: 20
+    envVars:
+      - key: FDM_DATA
+        value: /data
+      - key: PORTAL_URL
+        value: https://fdm.vektor.aero
+      - key: OWNER_EMAIL
+        value: fdm@vektor.aero
+      - key: OWNER_PASSWORD
+        sync: false
+      - key: SECRET_KEY
+        generateValue: true
+      - key: MCP_TOKEN
+        generateValue: true
+      - key: SMTP_HOST
+        value: mail.infomaniak.com
+      - key: SMTP_PORT
+        value: "465"
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASS
+        sync: false
+      - key: SMTP_FROM
+        value: Vektor FDM <fdm@vektor.aero>
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: STRIPE_PAYMENT_LINK
+        sync: false

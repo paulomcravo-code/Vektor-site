@@ -1,0 +1,279 @@
+# Boeing 737-700 BBJ · leitura de CSV em unidades de engenharia
+aircraft_type: Boeing 737-700 BBJ
+storage: csv
+validated: false
+notes: Perfil para dados em unidades de engenharia (CSV exportado do software L3/FA2100 ou do fornecedor FDM). O ficheiro
+  .fdr do FA2100 vem comprimido em formato proprietário e não é lido diretamente.
+parameters:
+  Pressure Altitude:
+    description: Pressure Altitude
+    units: ft
+    columns:
+    - ALT_STD
+    - Altitude
+    - PALT
+    - Pressure Alt
+    - ALT STD
+    - Baro Altitude
+  Radio Height:
+    description: Radio Height
+    units: ft
+    columns:
+    - Radio Altitude
+    - RALT
+    - RAD ALT
+    - Radio Alt
+    - RA
+  Computed Airspeed:
+    description: Computed Airspeed
+    units: kt
+    columns:
+    - CAS
+    - IAS
+    - Airspeed
+    - Indicated Airspeed
+    - CAS (kt)
+  Groundspeed:
+    description: Groundspeed
+    units: kt
+    columns:
+    - GS
+    - Ground Speed
+    - GSPD
+  Vertical Speed:
+    description: Vertical Speed
+    units: ft/min
+    columns:
+    - IVV
+    - VSI
+    - Inertial Vertical Speed
+    - Vert Speed
+    - VS
+  Pitch Angle:
+    description: Pitch Angle
+    units: deg
+    columns:
+    - PITCH
+    - Pitch
+    - Pitch Attitude
+  Roll Angle:
+    description: Roll Angle
+    units: deg
+    columns:
+    - ROLL
+    - Roll
+    - Bank Angle
+  Heading:
+    description: Heading
+    units: deg
+    columns:
+    - HDG
+    - Magnetic Heading
+    - Heading Mag
+    - True Heading
+  Vertical Acceleration:
+    description: Vertical Acceleration
+    units: g
+    columns:
+    - VRTG
+    - Normal Acceleration
+    - Vert Accel
+    - NZ
+  Longitudinal Acceleration:
+    description: Longitudinal Acceleration
+    units: g
+    columns:
+    - LONG
+    - Longitudinal Accel
+    - LONG ACCEL
+    - NX
+  Latitude:
+    description: Latitude
+    units: deg
+    columns:
+    - LAT
+    - Present Position Lat
+    - Latitude (deg)
+  Longitude:
+    description: Longitude
+    units: deg
+    columns:
+    - LON
+    - LONG POS
+    - Present Position Long
+    - Longitude (deg)
+  N1 Engine 1:
+    description: N1 Engine 1
+    units: '%'
+    columns:
+    - N1_1
+    - N11
+    - N1 L
+    - N1 Eng 1
+    - N1 1
+  N1 Engine 2:
+    description: N1 Engine 2
+    units: '%'
+    columns:
+    - N1_2
+    - N12
+    - N1 R
+    - N1 Eng 2
+    - N1 2
+  EGT Engine 1:
+    description: EGT Engine 1
+    units: degC
+    columns:
+    - EGT_1
+    - EGT1
+    - EGT L
+    - EGT Eng 1
+  EGT Engine 2:
+    description: EGT Engine 2
+    units: degC
+    columns:
+    - EGT_2
+    - EGT2
+    - EGT R
+    - EGT Eng 2
+  Flap Position:
+    description: Flap Position
+    units: deg
+    columns:
+    - FLAP
+    - Flap Handle
+    - Flaps
+    - Flap Angle
+  Speed Brake Handle Position:
+    description: Speed Brake Handle Position
+    units: deg
+    columns:
+    - SPD_BRK
+    - Speed Brake
+    - Speedbrake Handle
+    - SBHP
+  AP Status:
+    description: AP Status
+    units: ''
+    columns:
+    - AP
+    - Autopilot
+    - AP Engaged
+    - AP_ENG
+    - A/P Engaged
+  Left Gear Down:
+    description: Left Gear Down
+    units: ''
+    columns:
+    - GEAR
+    - Gear Down L
+    - LDG Down L
+    - Left Gear Down Lock
+  GPWS Warning:
+    description: GPWS Warning
+    units: ''
+    columns:
+    - GPWS
+    - GPWS Warn
+  TCAS Warning:
+    description: TCAS Warning
+    units: ''
+    columns:
+    - TCAS RA
+    - TCAS
+    - TCAS_RA
+  Windshear Warning:
+    description: Windshear Warning
+    units: ''
+    columns:
+    - Windshear
+    - WSHR
+    - PWS Warning
+  Configuration Warning:
+    description: Configuration Warning
+    units: ''
+    columns:
+    - TO Config Warning
+    - Takeoff Warning
+    - Config Warn
+  Overspeed Warning:
+    description: Overspeed Warning
+    units: ''
+    columns:
+    - Overspeed
+    - OVSPD
+    - Mach Overspeed
+  Lav Smoke Warning:
+    description: Lav Smoke Warning
+    units: ''
+    columns:
+    - Lav Smoke
+    - LAV SMK
+  Glideslope Deviation:
+    description: Glideslope Deviation
+    units: dots
+    columns:
+    - GS DEV
+    - Glideslope Dev
+    - GSDEV
+  Localizer Deviation:
+    description: Localizer Deviation
+    units: dots
+    columns:
+    - LOC DEV
+    - Localizer Dev
+    - LOCDEV
+  MACH:
+    description: MACH
+    units: ''
+    columns:
+    - Mach
+    - Mach Number
+  Gross Weight:
+    description: Gross Weight
+    units: kg
+    columns:
+    - GW
+    - Gross Wt
+    - Weight
+  CN1 Vibration Engine 1:
+    description: CN1 Vibration Engine 1
+    units: units
+    columns:
+    - N1 VIB 1
+    - Vib N1 1
+    - CN1 VIB 1
+  CN1 Vibration Engine 2:
+    description: CN1 Vibration Engine 2
+    units: units
+    columns:
+    - N1 VIB 2
+    - Vib N1 2
+    - CN1 VIB 2
+  CN2 Vibration Engine 1:
+    description: CN2 Vibration Engine 1
+    units: units
+    columns:
+    - N2 VIB 1
+    - Vib N2 1
+    - CN2 VIB 1
+  CN2 Vibration Engine 2:
+    description: CN2 Vibration Engine 2
+    units: units
+    columns:
+    - N2 VIB 2
+    - Vib N2 2
+    - CN2 VIB 2
+  Touchdown Distance:
+    description: Touchdown Distance
+    units: ft
+    columns:
+    - TD Distance
+    - Touchdown Dist
+derived:
+  Absolute Roll Angle: abs([Roll Angle])
+  Absolute Vertical Speed: abs([Vertical Speed])
+  Pitch Rate: rate([Pitch Angle])
+  Engine Asymmetry: abs([N1 Engine 1] - [N1 Engine 2])
+  Absolute Localizer Deviation: abs([Localizer Deviation])
+  AIR GROUND: '[Radio Height] < 5'

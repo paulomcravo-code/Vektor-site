@@ -1,0 +1,201 @@
+# ---------------------------------------------------------------------------
+# Catálogo de eventos FDM DE EXEMPLO com três níveis de risco.
+# thresholds: [nível 1 (baixo), nível 2 (médio), nível 3 (alto)]
+# mode: max (excede para cima) | min (excede para baixo) | abs_max (|valor|)
+# Os limiares são ilustrativos. Os valores operacionais têm de vir do
+# AFM/FCOM/AMM do fabricante e do programa FDM aprovado do operador.
+# ---------------------------------------------------------------------------
+phase_detection:
+  mapping:
+    altitude: ALT_STD
+    radio_altitude: RALT
+    airspeed: IAS
+    groundspeed: GS
+    air_ground: AIR_GND
+
+events:
+  - id: HARD_LANDING
+    name: Aceleração vertical elevada no toque
+    category: Aterragem
+    parameter: VRTG
+    units: g
+    mode: max
+    thresholds: [1.6, 1.8, 2.0]
+    phases: [LANDING]
+    min_duration_s: 0.1
+    description: Pico de aceleração vertical na janela de aterragem.
+    mitigation:
+      1:
+        - Incluir na análise de tendência mensal por aeroporto, pista e tipo.
+        - Rever no próximo briefing de segurança temas de flare e controlo de razão de descida final.
+      2:
+        - Revisão pela equipa FDM e contacto confidencial à tripulação através do gatekeeper.
+        - Verificar estabilidade da aproximação nos 60 s anteriores e condições de vento.
+        - Avaliar necessidade de inspeção conforme AMM (critério de hard landing do fabricante).
+      3:
+        - Notificar de imediato a Manutenção para inspeção de hard landing conforme AMM antes do próximo voo.
+        - Abrir investigação de segurança no SMS e avaliar obrigação de reporte (Reg. (UE) 376/2014).
+        - Entrevista confidencial com a tripulação e, se aplicável, treino adicional em simulador.
+
+  - id: HIGH_BANK
+    name: Pranchamento excessivo em voo
+    category: Controlo de voo
+    parameter: ROLL
+    units: deg
+    mode: abs_max
+    thresholds: [35, 40, 45]
+    phases: [INITIAL_CLIMB, CLIMB, CRUISE, DESCENT, APPROACH]
+    min_duration_s: 2
+    mitigation:
+      1:
+        - Monitorizar tendência por tripulação anonimizada e por procedimento (SID/STAR).
+      2:
+        - Revisão FDM com contacto via gatekeeper; verificar modo do piloto automático e turbulência.
+        - Reforçar limites de pranchamento do SOP em boletim de segurança.
+      3:
+        - Investigação de segurança; avaliar possível perda de controlo (LOC-I) e acionar treino UPRT.
+        - Verificar sistemas de controlo de voo e autopiloto com a Manutenção.
+
+  - id: HIGH_BANK_LOW
+    name: Pranchamento elevado abaixo de 300 ft
+    category: Controlo de voo
+    parameter: ROLL
+    units: deg
+    mode: abs_max
+    thresholds: [10, 15, 20]
+    phases: [INITIAL_CLIMB, APPROACH, LANDING]
+    conditions: [{param: RALT, op: "<", value: 300}, {param: AIR_GND, op: "==", value: 1}]
+    min_duration_s: 1
+    mitigation:
+      1:
+        - Acompanhar em tendência; correlacionar com vento cruzado reportado (METAR).
+      2:
+        - Revisão FDM; avaliar técnica de vento cruzado e risco de contacto de ponta de asa/hélice.
+      3:
+        - Investigação imediata; risco de wingtip/propeller strike. Inspeção visual pela Manutenção.
+        - Treino específico de aterragem com vento cruzado.
+
+  - id: HIGH_ROD_APP
+    name: Razão de descida elevada abaixo de 1000 ft
+    category: Aproximação estabilizada
+    parameter: VS_FPM
+    units: ft/min
+    mode: min
+    thresholds: [-1000, -1200, -1500]
+    phases: [APPROACH]
+    conditions: [{param: RALT, op: "<", value: 1000}, {param: RALT, op: ">", value: 50}]
+    min_duration_s: 3
+    mitigation:
+      1:
+        - Tendência de aproximações não estabilizadas por aeroporto e pista.
+      2:
+        - Revisão FDM; confirmar se a política de go-around foi aplicada.
+        - Rever critérios de aproximação estabilizada em briefing e boletim.
+      3:
+        - Investigação de segurança (precursor de CFIT/runway excursion); contacto via gatekeeper.
+        - Avaliar procedimento de aproximação do aeroporto e eventual hotspot no Safety Risk Register.
+
+  - id: PITCH_ROTATION
+    name: Atitude de picada elevada na rotação
+    category: Descolagem
+    parameter: PITCH
+    units: deg
+    mode: max
+    thresholds: [10, 11, 12]
+    phases: [TAKEOFF, INITIAL_CLIMB]
+    conditions: [{param: RALT, op: "<", value: 35}]
+    min_duration_s: 0.25
+    mitigation:
+      1:
+        - Tendência de técnica de rotação; comparar com cálculo de performance.
+      2:
+        - Revisão FDM; verificar velocidade de rotação e massa/centragem do voo.
+      3:
+        - Risco de tail strike: inspeção da cauda pela Manutenção e investigação de segurança.
+        - Treino de técnica de rotação em simulador.
+
+  - id: VMO_EXCEED
+    name: Velocidade acima da VMO
+    category: Envelope de voo
+    parameter: IAS
+    units: kt
+    mode: max
+    thresholds: [245, 250, 255]
+    phases: [CLIMB, CRUISE, DESCENT]
+    min_duration_s: 2
+    mitigation:
+      1:
+        - Monitorizar margem para a VMO em descida; rever uso de velocidades alvo.
+      2:
+        - Revisão FDM; verificar turbulência/vento de cauda e gestão de energia na descida.
+      3:
+        - Notificar Manutenção para inspeção estrutural de overspeed conforme AMM.
+        - Investigação de segurança e avaliação de reporte obrigatório.
+
+  - id: SPEED_BELOW_FL100
+    name: Velocidade elevada abaixo de FL100
+    category: Envelope de voo
+    parameter: IAS
+    units: kt
+    mode: max
+    thresholds: [255, 265, 280]
+    phases: [INITIAL_CLIMB, CLIMB, DESCENT, APPROACH]
+    conditions: [{param: ALT_STD, op: "<", value: 10000}]
+    min_duration_s: 5
+    mitigation:
+      1:
+        - Tendência de cumprimento do limite de 250 kt abaixo de FL100 (salvo autorização ATC).
+      2:
+        - Revisão FDM; confirmar se havia autorização ATC e risco de birdstrike associado.
+      3:
+        - Investigação; potencial infração ao SERA e risco de colisão com aves a alta energia.
+
+  - id: GS_DEVIATION
+    name: Desvio de glideslope abaixo de 1000 ft
+    category: Aproximação estabilizada
+    parameter: GSDEV
+    units: dots
+    mode: abs_max
+    thresholds: [1.0, 1.5, 2.0]
+    phases: [APPROACH]
+    conditions: [{param: RALT, op: "<", value: 1000}, {param: RALT, op: ">", value: 100}]
+    min_duration_s: 3
+    mitigation:
+      1:
+        - Tendência por aeroporto e tipo de aproximação.
+      2:
+        - Revisão FDM; avaliar se critérios de aproximação estabilizada foram cumpridos.
+      3:
+        - Investigação de segurança; reforçar política de go-around sem penalização.
+
+  - id: GEAR_LATE
+    name: Trem não descido abaixo de 1000 ft
+    category: Configuração
+    parameter: GEAR
+    units: ""
+    mode: min
+    thresholds: [0.5, 0.5, 0.5]
+    phases: [APPROACH]
+    conditions: [{param: RALT, op: "<", value: 1000}]
+    min_duration_s: 2
+    mitigation:
+      3:
+        - Investigação imediata; precursor de aterragem com trem recolhido.
+        - Rever disciplina de checklist e chamadas de configuração.
+
+  - id: TAXI_SPEED
+    name: Velocidade de rolagem elevada
+    category: Solo
+    parameter: GS
+    units: kt
+    mode: max
+    thresholds: [25, 30, 35]
+    phases: [GROUND]
+    min_duration_s: 4
+    mitigation:
+      1:
+        - Tendência por aeroporto; divulgar limites de velocidade de taxi.
+      2:
+        - Revisão FDM com contacto via gatekeeper; risco de saída de taxiway.
+      3:
+        - Investigação; risco de excursão em solo e desgaste de travões/pneus.
