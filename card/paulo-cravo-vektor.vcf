@@ -1,0 +1,13 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Cravo;Paulo;;;
+FN:Paulo Cravo
+ORG:Vektor
+TITLE:Aviation Safety & Compliance
+EMAIL;TYPE=INTERNET,WORK,PREF:pcravo@vektor.aero
+EMAIL;TYPE=INTERNET,WORK:info@vektor.aero
+URL;TYPE=WORK:https://www.vektor.aero
+X-SOCIALPROFILE;TYPE=linkedin:https://www.linkedin.com/in/paulo-cravo-01107a13
+URL;TYPE=LinkedIn:https://www.linkedin.com/in/paulo-cravo-01107a13
+NOTE:Aviation consultancy: Safety Management (SMS), Compliance Monitoring, Security, Audits, AOC and IS-BAO / IS-BAH, Manuals & Documentation, FDM (fixed & rotary wing), Part-IS, ReFuelEU / SAF, Training.
+END:VCARD
